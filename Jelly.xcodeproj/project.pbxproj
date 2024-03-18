@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		52281C962BA1D21200689B0D /* ResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52281C952BA1D21200689B0D /* ResultModel.swift */; };
 		52281C982BA1DF4300689B0D /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52281C972BA1DF4300689B0D /* HistoryTableViewCell.swift */; };
+		52281C9A2BA2E56200689B0D /* NameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52281C992BA2E56200689B0D /* NameController.swift */; };
+		52281C9C2BA3C4B700689B0D /* SelectedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52281C9B2BA3C4B700689B0D /* SelectedCell.swift */; };
+		52281C9E2BA3C97700689B0D /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52281C9D2BA3C97700689B0D /* Helper.swift */; };
+		52281CA02BA3DE7F00689B0D /* TypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52281C9F2BA3DE7F00689B0D /* TypeModel.swift */; };
+		52281CA82BA4089C00689B0D /* FoodTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52281CA72BA4089C00689B0D /* FoodTypeViewController.swift */; };
+		52281CAA2BA413C600689B0D /* TypeCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52281CA92BA413C600689B0D /* TypeCollectionDataSource.swift */; };
+		52281CAE2BA418D800689B0D /* StatusTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52281CAD2BA418D800689B0D /* StatusTypeViewController.swift */; };
+		52281CB12BA427EF00689B0D /* WeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52281CB02BA427EF00689B0D /* WeightViewController.swift */; };
+		52281CB42BA43C4F00689B0D /* CalorieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52281CB32BA43C4F00689B0D /* CalorieViewController.swift */; };
+		52281CB72BA44E9700689B0D /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52281CB62BA44E9700689B0D /* CustomTextFieldView.swift */; };
+		52281CBA2BA44EDB00689B0D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 52281CB92BA44EDB00689B0D /* SnapKit */; };
+		52281CBD2BA44EEB00689B0D /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 52281CBC2BA44EEB00689B0D /* Then */; };
 		524386982BA1A27600E921A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524386972BA1A27600E921A2 /* AppDelegate.swift */; };
 		5243869A2BA1A27600E921A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524386992BA1A27600E921A2 /* SceneDelegate.swift */; };
 		5243869C2BA1A27600E921A2 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5243869B2BA1A27600E921A2 /* HistoryViewController.swift */; };
@@ -16,11 +28,25 @@
 		524386A22BA1A27600E921A2 /* Jelly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 524386A02BA1A27600E921A2 /* Jelly.xcdatamodeld */; };
 		524386A42BA1A27700E921A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 524386A32BA1A27700E921A2 /* Assets.xcassets */; };
 		524386A72BA1A27700E921A2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 524386A62BA1A27700E921A2 /* Base */; };
+		5299BFF22BA82F130057BABB /* CustomInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299BFF12BA82F130057BABB /* CustomInfoView.swift */; };
+		52B3C2A92BA7FA630010B6F5 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B3C2A82BA7FA630010B6F5 /* ResultViewController.swift */; };
+		52B3C2AB2BA811A10010B6F5 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B3C2AA2BA811A10010B6F5 /* UIView+Ext.swift */; };
+		52B3C2AD2BA812100010B6F5 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B3C2AC2BA812100010B6F5 /* UIViewController+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		52281C952BA1D21200689B0D /* ResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultModel.swift; sourceTree = "<group>"; };
 		52281C972BA1DF4300689B0D /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		52281C992BA2E56200689B0D /* NameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameController.swift; sourceTree = "<group>"; };
+		52281C9B2BA3C4B700689B0D /* SelectedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCell.swift; sourceTree = "<group>"; };
+		52281C9D2BA3C97700689B0D /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		52281C9F2BA3DE7F00689B0D /* TypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeModel.swift; sourceTree = "<group>"; };
+		52281CA72BA4089C00689B0D /* FoodTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTypeViewController.swift; sourceTree = "<group>"; };
+		52281CA92BA413C600689B0D /* TypeCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionDataSource.swift; sourceTree = "<group>"; };
+		52281CAD2BA418D800689B0D /* StatusTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTypeViewController.swift; sourceTree = "<group>"; };
+		52281CB02BA427EF00689B0D /* WeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightViewController.swift; sourceTree = "<group>"; };
+		52281CB32BA43C4F00689B0D /* CalorieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieViewController.swift; sourceTree = "<group>"; };
+		52281CB62BA44E9700689B0D /* CustomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
 		524386942BA1A27600E921A2 /* Jelly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jelly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		524386972BA1A27600E921A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		524386992BA1A27600E921A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +56,10 @@
 		524386A32BA1A27700E921A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		524386A62BA1A27700E921A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		524386A82BA1A27700E921A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5299BFF12BA82F130057BABB /* CustomInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInfoView.swift; sourceTree = "<group>"; };
+		52B3C2A82BA7FA630010B6F5 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		52B3C2AA2BA811A10010B6F5 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		52B3C2AC2BA812100010B6F5 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,12 +67,106 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52281CBA2BA44EDB00689B0D /* SnapKit in Frameworks */,
+				52281CBD2BA44EEB00689B0D /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52281CA12BA4063D00689B0D /* HistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				5243869B2BA1A27600E921A2 /* HistoryViewController.swift */,
+				52281C972BA1DF4300689B0D /* HistoryTableViewCell.swift */,
+			);
+			path = HistoryView;
+			sourceTree = "<group>";
+		};
+		52281CA22BA4064D00689B0D /* NameView */ = {
+			isa = PBXGroup;
+			children = (
+				52281C992BA2E56200689B0D /* NameController.swift */,
+				52281C9B2BA3C4B700689B0D /* SelectedCell.swift */,
+			);
+			path = NameView;
+			sourceTree = "<group>";
+		};
+		52281CA32BA4065B00689B0D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				52281C9F2BA3DE7F00689B0D /* TypeModel.swift */,
+				52281C952BA1D21200689B0D /* ResultModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		52281CA42BA4066700689B0D /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				52281C9D2BA3C97700689B0D /* Helper.swift */,
+				52B3C2AA2BA811A10010B6F5 /* UIView+Ext.swift */,
+				52B3C2AC2BA812100010B6F5 /* UIViewController+Ext.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		52281CA52BA4068F00689B0D /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				524386A02BA1A27600E921A2 /* Jelly.xcdatamodeld */,
+				524386972BA1A27600E921A2 /* AppDelegate.swift */,
+				524386992BA1A27600E921A2 /* SceneDelegate.swift */,
+				5243869D2BA1A27600E921A2 /* Main.storyboard */,
+				524386A32BA1A27700E921A2 /* Assets.xcassets */,
+				524386A52BA1A27700E921A2 /* LaunchScreen.storyboard */,
+			);
+			path = Default;
+			sourceTree = "<group>";
+		};
+		52281CA62BA4087300689B0D /* FoodTypeView */ = {
+			isa = PBXGroup;
+			children = (
+				52281CA72BA4089C00689B0D /* FoodTypeViewController.swift */,
+				52281CA92BA413C600689B0D /* TypeCollectionDataSource.swift */,
+			);
+			path = FoodTypeView;
+			sourceTree = "<group>";
+		};
+		52281CAB2BA418B000689B0D /* StatusTypeView */ = {
+			isa = PBXGroup;
+			children = (
+				52281CAD2BA418D800689B0D /* StatusTypeViewController.swift */,
+			);
+			path = StatusTypeView;
+			sourceTree = "<group>";
+		};
+		52281CAF2BA4226F00689B0D /* WeightView */ = {
+			isa = PBXGroup;
+			children = (
+				52281CB02BA427EF00689B0D /* WeightViewController.swift */,
+			);
+			path = WeightView;
+			sourceTree = "<group>";
+		};
+		52281CB22BA43C0600689B0D /* CalorieView */ = {
+			isa = PBXGroup;
+			children = (
+				52281CB32BA43C4F00689B0D /* CalorieViewController.swift */,
+			);
+			path = CalorieView;
+			sourceTree = "<group>";
+		};
+		52281CB52BA44E7F00689B0D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				52281CB62BA44E9700689B0D /* CustomTextFieldView.swift */,
+				5299BFF12BA82F130057BABB /* CustomInfoView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		5243868B2BA1A27600E921A2 = {
 			isa = PBXGroup;
 			children = (
@@ -62,18 +186,28 @@
 		524386962BA1A27600E921A2 /* Jelly */ = {
 			isa = PBXGroup;
 			children = (
-				524386972BA1A27600E921A2 /* AppDelegate.swift */,
-				524386992BA1A27600E921A2 /* SceneDelegate.swift */,
-				5243869B2BA1A27600E921A2 /* HistoryViewController.swift */,
-				5243869D2BA1A27600E921A2 /* Main.storyboard */,
-				524386A32BA1A27700E921A2 /* Assets.xcassets */,
-				524386A52BA1A27700E921A2 /* LaunchScreen.storyboard */,
+				52281CB52BA44E7F00689B0D /* Components */,
+				52281CA52BA4068F00689B0D /* Default */,
+				52281CA42BA4066700689B0D /* Extention */,
+				52281CA32BA4065B00689B0D /* Model */,
+				52281CA12BA4063D00689B0D /* HistoryView */,
+				52281CA22BA4064D00689B0D /* NameView */,
+				52281CA62BA4087300689B0D /* FoodTypeView */,
+				52281CAB2BA418B000689B0D /* StatusTypeView */,
+				52281CAF2BA4226F00689B0D /* WeightView */,
+				52281CB22BA43C0600689B0D /* CalorieView */,
+				52B3C2A72BA7FA550010B6F5 /* ResultView */,
 				524386A82BA1A27700E921A2 /* Info.plist */,
-				524386A02BA1A27600E921A2 /* Jelly.xcdatamodeld */,
-				52281C952BA1D21200689B0D /* ResultModel.swift */,
-				52281C972BA1DF4300689B0D /* HistoryTableViewCell.swift */,
 			);
 			path = Jelly;
+			sourceTree = "<group>";
+		};
+		52B3C2A72BA7FA550010B6F5 /* ResultView */ = {
+			isa = PBXGroup;
+			children = (
+				52B3C2A82BA7FA630010B6F5 /* ResultViewController.swift */,
+			);
+			path = ResultView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -92,6 +226,10 @@
 			dependencies = (
 			);
 			name = Jelly;
+			packageProductDependencies = (
+				52281CB92BA44EDB00689B0D /* SnapKit */,
+				52281CBC2BA44EEB00689B0D /* Then */,
+			);
 			productName = Jelly;
 			productReference = 524386942BA1A27600E921A2 /* Jelly.app */;
 			productType = "com.apple.product-type.application";
@@ -120,6 +258,10 @@
 				Base,
 			);
 			mainGroup = 5243868B2BA1A27600E921A2;
+			packageReferences = (
+				52281CB82BA44EDB00689B0D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				52281CBB2BA44EEB00689B0D /* XCRemoteSwiftPackageReference "Then" */,
+			);
 			productRefGroup = 524386952BA1A27600E921A2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -147,12 +289,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52B3C2AD2BA812100010B6F5 /* UIViewController+Ext.swift in Sources */,
+				5299BFF22BA82F130057BABB /* CustomInfoView.swift in Sources */,
 				52281C982BA1DF4300689B0D /* HistoryTableViewCell.swift in Sources */,
 				5243869C2BA1A27600E921A2 /* HistoryViewController.swift in Sources */,
+				52281CA82BA4089C00689B0D /* FoodTypeViewController.swift in Sources */,
 				524386982BA1A27600E921A2 /* AppDelegate.swift in Sources */,
 				524386A22BA1A27600E921A2 /* Jelly.xcdatamodeld in Sources */,
 				52281C962BA1D21200689B0D /* ResultModel.swift in Sources */,
+				52281CAA2BA413C600689B0D /* TypeCollectionDataSource.swift in Sources */,
+				52281CAE2BA418D800689B0D /* StatusTypeViewController.swift in Sources */,
+				52281CA02BA3DE7F00689B0D /* TypeModel.swift in Sources */,
+				52281C9E2BA3C97700689B0D /* Helper.swift in Sources */,
+				52281CB42BA43C4F00689B0D /* CalorieViewController.swift in Sources */,
+				52281C9A2BA2E56200689B0D /* NameController.swift in Sources */,
+				52281C9C2BA3C4B700689B0D /* SelectedCell.swift in Sources */,
+				52281CB12BA427EF00689B0D /* WeightViewController.swift in Sources */,
+				52B3C2AB2BA811A10010B6F5 /* UIView+Ext.swift in Sources */,
+				52281CB72BA44E9700689B0D /* CustomTextFieldView.swift in Sources */,
 				5243869A2BA1A27600E921A2 /* SceneDelegate.swift in Sources */,
+				52B3C2A92BA7FA630010B6F5 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +460,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LNXWGGBBH6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Jelly/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -336,6 +493,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LNXWGGBBH6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Jelly/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -383,6 +541,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		52281CB82BA44EDB00689B0D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		52281CBB2BA44EEB00689B0D /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		52281CB92BA44EDB00689B0D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52281CB82BA44EDB00689B0D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		52281CBC2BA44EEB00689B0D /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52281CBB2BA44EEB00689B0D /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		524386A02BA1A27600E921A2 /* Jelly.xcdatamodeld */ = {

@@ -12,21 +12,32 @@ class HistoryViewController: UIViewController {
     let dummySection = ["짱아", "나비"]
     
     let dummyData = [ResultSection(name: "짱아", 
-                                   row: [ResultModel(), ResultModel(), ResultModel()]),
+                                   row: [ResultModel(), ResultModel(), ResultModel(),
+                                         ResultModel(), ResultModel(), ResultModel(),
+                                         ResultModel(), ResultModel(), ResultModel(),
+                                         ResultModel(), ResultModel(), ResultModel(),
+                                         ResultModel(), ResultModel(), ResultModel()]),
                      ResultSection(name: "나비",
                                    row: [ResultModel(), ResultModel()])
     ]
     
     @IBOutlet weak var historyTableView: UITableView!
     
+    @IBOutlet weak var WriteButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         historyTableView.dataSource = self
         historyTableView.delegate = self
+        historyTableView.showsVerticalScrollIndicator = false
         self.title = "History View"
-        
-        historyTableView.sectionHeaderTopPadding = 0
+    
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+     
+        WriteButton.layer.cornerRadius = WriteButton.frame.width / 2
     }
 
 
@@ -77,6 +88,7 @@ extension HistoryViewController: UITableViewDelegate {
         label.font = UIFont.systemFont(ofSize: 20)
         label.text = dummyData[section].name
         
+        
         return label
     }
     
@@ -87,3 +99,5 @@ extension HistoryViewController: UITableViewDelegate {
     
 
 }
+
+
