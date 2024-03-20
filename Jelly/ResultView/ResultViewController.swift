@@ -7,31 +7,76 @@
 
 import UIKit
 import SnapKit
+import Then
 
 class ResultViewController: UIViewController {
     
+    // MARK: - Variables
+    var currentModel : ResultModel? = ResultModel.init(foodType: .mix)
     
-    let customTextField = CustomTextFieldView()
-
+    @IBOutlet weak var petInfoView: UIStackView!
+    
+    private let resultContentView = UIView().then {
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = 8
+        $0.backgroundColor = .systemGray
+    }
+    
+    private let resultScrollView = UIScrollView().then {
+        $0.isUserInteractionEnabled = true
+        $0.showsVerticalScrollIndicator = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        buttonSetup()
-        setupAction()
-        setupNaviItem()
-
-    }
-    
-    
-    func buttonSetup() {
-        self.view.addSubview(customTextField)
         
-        customTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview().offset(100)
+        if let viewType = currentModel?.foodType {
+            createTypeView(viewType)
         }
     }
-    func setupAction() {
+    ¢
+    /// 타입에 따라서 뷰 생성
+    /// - Parameter elements: 반려동물 식사 타입
+    fileprivate func createTypeView(_ elements: FoodType) {
+        if elements == .mix {
+            let mixView = UIView.makeMixView(
+                (CustomType.outputOfType(outputType: .onButton), true, firstInputData(_:)),
+                (CustomType.outputOfType(outputType: .nonButton(showLabel: true)), nil, nil), 20)
+
+            setupUI(UIStackView.makeResultView(mixView))
+        } else {
+            let singleView = UIView.makeSingleView((CustomType.outputOfType(outputType: .nonButton(showLabel: false)), nil, nil))
+            
+            setupUI(UIStackView.makeResultView(singleView))
+        }
+    }
+    
+    fileprivate func firstInputData(_ input: String) -> Void {
+            print("첫번째 칸입니다. : \(input)")
+    }
+    
+    fileprivate func setupUI(_ content: UIView) {
+        self.view.addSubview(resultScrollView)
+        self.resultContentView.addSubview(content)
+        self.resultScrollView.addSubview(resultContentView)
+    
+        content.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
+        resultContentView.snp.makeConstraints { make in
+            make.edges.equalTo(resultScrollView.contentLayoutGuide.snp.edges)
+            make.width.equalTo(resultScrollView.frameLayoutGuide.snp.width)
+        }
+        
+        resultScrollView.snp.makeConstraints { make in
+            make.top.equalTo(petInfoView.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview()
+        }
+    }
+    
+    fileprivate func setupAction() -> UIMenu {
         let menu = UIMenu(children: [
             UIAction(title: "1번", handler: { _ in
                 print("1번 선택")
@@ -47,46 +92,7 @@ class ResultViewController: UIViewController {
             })
         ])
         
-        customTextField.weightButton.menu = menu
-        customTextField.weightButton.showsMenuAsPrimaryAction = true
-        
+        return menu
     }
-    
-    
-    // MARK: - Selectors
-    
-    fileprivate func setupNaviItem() {
-        let menu = UIMenu(children: [
-            UIAction(title: "1번", handler: { _ in
-                print("1번 선택")
-            }),
-            UIAction(title: "2번", handler: { _ in
-                print("2번 선택")
-            }),
-            UIAction(title: "3번", handler: { _ in
-                print("3번 선택")
-            }),
-            UIAction(title: "4번", handler: { _ in
-                print("4번 선택")
-            })
-        ])
-        
-        let menuButton = UIBarButtonItem(title: "Menu", menu: menu)
-        
-        self.navigationItem.rightBarButtonItem = menuButton
-    }
+
 }
-
-
-#if DEBUG
-
-import SwiftUI
-
-struct ViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        ResultViewController().getPreview()
-            .ignoresSafeArea()
-    }
-}
-
-#endif

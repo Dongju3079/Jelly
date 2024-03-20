@@ -17,18 +17,18 @@ class CustomInfoView: UIView {
     }
     
     private let mainSubLabel = UILabel().then {
-        $0.font = .boldSystemFont(ofSize: 15)
-        $0.textColor = .label
+        $0.font = .boldSystemFont(ofSize: 25)
+        $0.textColor = .systemGray2
     }
     
     private let secondTitleLabel = UILabel().then {
-        $0.font = .boldSystemFont(ofSize: 20)
+        $0.font = .boldSystemFont(ofSize: 15)
         $0.textColor = .label
     }
     
     private let secondSubLabel = UILabel().then {
         $0.font = .boldSystemFont(ofSize: 15)
-        $0.textColor = .label
+        $0.textColor = .systemGray2
     }
     
     override init(frame: CGRect) {
@@ -62,7 +62,7 @@ class CustomInfoView: UIView {
         
         mainSubLabel.snp.makeConstraints { make in
             make.leading.equalTo(mainTitleLabel.snp.trailing).offset(5)
-            make.bottom.equalTo(mainTitleLabel.snp.bottom).offset(-2)
+            make.bottom.equalTo(mainTitleLabel.snp.bottom)
         }
         
         secondTitleLabel.snp.makeConstraints { make in
