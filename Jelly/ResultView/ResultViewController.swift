@@ -34,7 +34,7 @@ class ResultViewController: UIViewController {
             createTypeView(viewType)
         }
     }
-    ¢
+    
     /// 타입에 따라서 뷰 생성
     /// - Parameter elements: 반려동물 식사 타입
     fileprivate func createTypeView(_ elements: FoodType) {
