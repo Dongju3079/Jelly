@@ -9,33 +9,30 @@ import UIKit
 import SnapKit
 import Then
 
-// MARK: - Button Type
-enum CustomType {
-    enum OutputType {
-        case normal
-        case nonButton(showLabel: Bool)
-        case onButton
-    }
-    
-    case singleInput(foodType: FoodType)
-    case doubleInput(foodType: FoodType)
-    case outputOfType(outputType: OutputType)
-}
-
 class CustomTextFieldView: UIView {
 
     // MARK: - Variables
-    var inputTextFieldEvent: ((String) -> Void)?
     
+    var inputTextFieldEvent: ((Double, FoodType) -> Void)?
+    
+    var inputTextFieldValue: String? = "0.0"{
+        didSet {
+            inputTextfield.text = inputTextFieldValue
+        }
+    }
+    
+    var viewType: FoodType?
     
     // MARK: - UI components
+    
     private let infoLabel = CustomInfoView()
     
     private lazy var inputTextfield: UITextField = UITextField().then {
+        $0.placeholder = "Kcal"
         $0.textAlignment = .center
         $0.tintColor = .clear
         $0.font = .systemFont(ofSize: 30)
-        $0.setContentCompressionResistancePriority(.init(750), for: .horizontal)
+        $0.setContentCompressionResistancePriority(.init(751), for: .horizontal)
         $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: $0.frame.height))
         $0.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: $0.frame.height))
         $0.leftViewMode = .always
@@ -45,18 +42,17 @@ class CustomTextFieldView: UIView {
     
     let selectButton: UIButton = UIButton().then {
         $0.titleLabel?.font = .boldSystemFont(ofSize: 20)
-        $0.setTitleColor(.black, for: .normal)
+        $0.setTitleColor(.label, for: .normal)
         $0.tintColor = .systemGray
         $0.isEnabled = false
-        $0.setContentCompressionResistancePriority(.init(751), for: .horizontal)
+        $0.setContentCompressionResistancePriority(.init(750), for: .horizontal)
         $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         $0.semanticContentAttribute = .forceRightToLeft
         $0.showsMenuAsPrimaryAction = true
-        $0.backgroundColor = .systemMint
     }
     
     private let nameLabel: UILabel = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .label
         $0.font = .boldSystemFont(ofSize: 20)
         $0.setContentCompressionResistancePriority(.init(749), for: .horizontal)
         $0.textAlignment = .left
@@ -91,17 +87,21 @@ class CustomTextFieldView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(type: CustomType,
-                     onButton: Bool? = false,
-                     inputTextFieldData: ((String) -> Void)? = nil) {
+    convenience init(viewType: FoodType? = nil,
+                     inputTextFieldData: ((Double, FoodType) -> Void)? = nil,
+                     userTextField: Bool = true) {
         
         self.init(frame: .zero)
+        self.viewType = viewType
+        self.inputTextfield.isEnabled = userTextField
         self.inputTextFieldEvent = inputTextFieldData
-        buttonConfiguration(onButton)
-        customViewConfiguration(type)
+       
     }
+}
 
-    // MARK: - UI Setup
+// MARK: - 뷰 위치 잡기
+extension CustomTextFieldView {
+    
     fileprivate func setupUI() {
         self.addSubview(allView)
         
@@ -121,77 +121,50 @@ class CustomTextFieldView: UIView {
     }
 }
 
-// MARK: - 뷰 구성
-extension CustomTextFieldView {
-    fileprivate func buttonConfiguration(_ onButton: Bool?) {
-        if onButton ?? false {
-            selectButton.menu = weightChangeMenu()
-            selectButtonActiveSetup()
-        } else {
-            selectButton.setContentCompressionResistancePriority(.init(749), for: .horizontal)
-        }
-    }
-    
-    fileprivate func customViewConfiguration(_ type: CustomType) {
-        switch type {
-            
-        case .singleInput(let foodType) :
-            singleInputSetup(foodType)
-            
-        case .doubleInput(let foodType) :
-            doubleInputSetup(foodType)
-            
-        case .outputOfType(let outputType):
-            outputSetup(outputType)
-        }
-    }
-}
+// MARK: - 커스텀뷰 추가 옵션
 
-// MARK: - 버튼에 사용되는 UIMenu 생성
 extension CustomTextFieldView {
     
-    fileprivate func weightChangeMenu() -> UIMenu {
+    /// 버튼 셋팅 및 사용
+    /// - Parameter title: 버튼 타이틀
+    func buttonConfiguration(title: String? = nil,
+                             scale: UIImage.SymbolScale = .small) {
         
-        return UIMenu(children: [
-            UIAction(title: "Kg(단위)", handler: { [weak self] _ in
-                self?.selectButton.setTitle("Kg(단위)", for: .normal)
-                // VC로 토글 날릴 수 있는 클로저 사용
-                
-            }),
-            UIAction(title: "g(단위)", handler: { [weak self] _ in
-                self?.selectButton.setTitle("g(단위)", for: .normal)
-                // VC로 토글 날릴 수 있는 클로저 사용
-                
-            })
-        ])
+        selectButton.isEnabled = true
+        let symbol = UIImage(systemName: "arrowtriangle.down.fill", withConfiguration: UIImage.SymbolConfiguration(scale: scale))
+        selectButton.setImage(symbol, for: .normal)
+        selectButton.setTitle(title, for: .normal)
+        selectButton.setContentCompressionResistancePriority(.init(752), for: .horizontal)
+        selectButton.snp.makeConstraints { make in
+            make.width.greaterThanOrEqualTo(80).priority(.init(752))
+        }
     }
+
     
-    fileprivate func amountChangeMenu() -> UIMenu {
-        
-        return UIMenu()
+    /// 텍스트 필드 좌측 네임 레이블 사용하기
+    /// - Parameter title: 네임 레이블 텍스트
+    func setupLeftLabel(_ title: String) {
+        self.nameLabel.text = title
+        nameLabel.setContentCompressionResistancePriority(.init(752), for: .horizontal)
     }
 }
 
 // MARK: - 텍스트필드 이벤트 전달
+
 extension CustomTextFieldView {
     @objc fileprivate func inputText(_ sender: UITextField) {
-        if let textData = sender.text {
-            inputTextFieldEvent?(textData)
+        if let textData = sender.text,
+           let calorie = Double(textData),
+           let viewType = viewType {
+            inputTextFieldEvent?(calorie, viewType)
         }
     }
 }
 
 
-// MARK: - 텍스트 필드 타입 설정
+// MARK: - 커스텀뷰 타이틀 설정하기
+
 extension CustomTextFieldView {
-    
-    
-    /// 버튼 활성화
-    fileprivate func selectButtonActiveSetup() {
-        let symbol = UIImage(systemName: "arrowtriangle.down.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .small))
-        selectButton.setImage(symbol, for: .normal)
-        selectButton.isEnabled = true
-    }
     
     /// 커스텀 텍스트 뷰 기본생성 메서드
     /// - Parameters:
@@ -200,76 +173,14 @@ extension CustomTextFieldView {
     ///   - secondTitle: 기본 타이틀
     ///   - secondSub: 기본(서브) 타이틀
     ///   - useButton: 버튼 사용유무
-    fileprivate func setting(mainTitle: String? = nil,
+    func setting(mainTitle: String? = nil,
                  mainSub: String? = nil,
                  secondTitle: String? = nil,
                  secondSub: String? = nil) {
         
         self.infoLabel.setupText(mainTitle, mainSub, secondTitle, secondSub)
     }
-    
-    
-    
-    /// 입력창이 한개 필요할 때
-    /// - Parameter foodType: 입력타입
-    fileprivate func singleInputSetup(_ foodType: FoodType) {
-        setting(mainTitle: "칼로리", mainSub: "Kcal")
-        
-        if foodType == .dry {
-            selectButton.setTitle("g(단위)", for: .normal)
-        }
-    }
-    
-    /// 입력창이 두개 필요할 때
-    /// - Parameter foodType: 입력타입
-    fileprivate func doubleInputSetup(_ foodType: FoodType) {
-        switch foodType {
-        case .wet:
-            setting(mainTitle: "습식",
-                    mainSub: "한 캔 기준",
-                    secondTitle: "칼로리",
-                    secondSub: "Kcal")
-        default:
-            setting(mainTitle: "건식",
-                    secondTitle: "칼로리",
-                    secondSub: "Kcal")
-            
-            selectButton.setTitle("g(단위)", for: .normal)
-        }
-    }
-    
-    
-    /// 결과안내 레이블
-    /// - Parameter outputType: 결과안내 타입
-    fileprivate func outputSetup(_ outputType: CustomType.OutputType) {
-        switch outputType {
-        case .normal:
-            setting(mainTitle: "하루 적정 칼로리")
-        case .nonButton(let showLabel):
-            if showLabel {
-                setupLeftLabel("건식")
-            } else {
-                setting(mainTitle: "1일 권장 급여량")
-            }
-        case .onButton:
-            setting(mainTitle: "1일 권장 급여량")
-            setupLeftLabel("습식")
-            selectButton.setTitle("수량 ", for: .normal)
-        }
-    }
-    
-    /// nameLabel text 입력하기
-    fileprivate func setupLeftLabel(_ title: String) {
-        self.nameLabel.text = title
-        nameLabel.setContentCompressionResistancePriority(.init(751), for: .horizontal)
-    }
 }
-
-
-
-
-
-
 
 #if DEBUG
 
@@ -277,7 +188,7 @@ import SwiftUI
 
 struct CustomViewTest_Previews: PreviewProvider {
     static var previews: some View {
-        CustomTextFieldView(type: .outputOfType(outputType: .onButton))
+        CustomTextFieldView()
             .getPreview()
             .frame(width: 350, height: 140)
             .previewLayout(.sizeThatFits)

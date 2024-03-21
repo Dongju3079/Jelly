@@ -10,11 +10,22 @@ import UIKit
 class TypeCollectionDataSource<Item>: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     var performSegueClosure: (String, Any?) -> () = { _,_ in  }
+    var selectedCell: ((Item) -> Void)?
+    
+    
     var nextPageName: String = ""
     private var items: [Item] = []
+    private var itemsTitle: [String] = []
     
-    func configuration(_ items: [Item], _ collectionView: UICollectionView, _ nextPage: String) {
+    func configuration(_ items: [Item],
+                       _ itemsTitle: [String],
+                       _ selectedClosure: ((Item) -> Void)? = nil,
+                       _ collectionView: UICollectionView,
+                       _ nextPage: String) {
+        
         self.items = items
+        self.itemsTitle = itemsTitle
+        selectedCell = selectedClosure
         self.nextPageName = nextPage
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -29,9 +40,9 @@ class TypeCollectionDataSource<Item>: NSObject, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedCell.name, for: indexPath) as? SelectedCell else { return UICollectionViewCell() }
         
-        if let type = items[indexPath.item] as? String {
-            cell.nameLabel.text = type
-        }
+        
+        cell.nameLabel.text = itemsTitle[indexPath.item]
+        
     
         return cell
     }
@@ -43,6 +54,9 @@ class TypeCollectionDataSource<Item>: NSObject, UICollectionViewDataSource, UICo
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedType = items[indexPath.item]
+        
+        selectedCell?(selectedType)
         performSegueClosure(nextPageName, nil)
     }
 }

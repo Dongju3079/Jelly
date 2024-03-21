@@ -40,7 +40,13 @@ extension UIProgressView {
 
 // MARK: - 소수점 아래 자르기
 extension Double {
-    var clean: String {
+    var clean: Double {
+        let cutString = String(format: "%.1f", self)
+        let value = Double(cutString) ?? 0
+        return value
+    }
+    
+    var convertString: String {
         return String(format: "%.1f", self)
     }
 }

@@ -10,8 +10,14 @@ import UIKit
 class WeightViewController: UIViewController {
 
     // MARK: - Variables
-    fileprivate var weightArray: [String] = []
+    fileprivate var weightArray: [Double] = []
     fileprivate var selectedWeight: String = ""
+    var calculateModel : ResultModel? {
+        didSet {
+            print(#fileID, #function, #line, "-값 제대로 들어옴 ")
+        }
+    }
+
     
     // MARK: - UI components
     @IBOutlet weak var progressBar: UIProgressView!
@@ -41,6 +47,13 @@ class WeightViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextPage))
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == CalorieViewController.name {
+            let vc = segue.destination as! CalorieViewController
+            vc.calculateModel = calculateModel
+        }
+    }
+    
     @objc fileprivate func nextPage() {
         performSegue(withIdentifier: CalorieViewController.name, sender: nil)
     }
@@ -67,12 +80,12 @@ extension WeightViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 30)
         label.textColor = .label
-        label.text = weightArray[row]
+        label.text = weightArray[row].convertString
         return label
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedWeight = weightArray[row]
+        self.calculateModel?.weight = weightArray[row]
     }
 
 }

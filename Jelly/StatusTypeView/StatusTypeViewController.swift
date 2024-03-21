@@ -11,7 +11,8 @@ class StatusTypeViewController: UIViewController {
 
     // MARK: - Variables
     var statusTypes: [StatusType] = StatusType.allCases
-    let collectionViewSetup = TypeCollectionDataSource<String>()
+    let collectionViewSetup = TypeCollectionDataSource<StatusType>()
+    var calculateModel : ResultModel?
     
     // MARK: - UI components
     
@@ -28,8 +29,13 @@ class StatusTypeViewController: UIViewController {
     
     // MARK: - UI Setup
     fileprivate func setupCollectionView() {
-        let items = statusTypes.map { $0.rawValue }
-        collectionViewSetup.configuration(items, StatusTypeCollectionView, WeightViewController.name)
+        let itemsTitle = statusTypes.map { $0.title }
+        
+        collectionViewSetup.configuration(statusTypes,
+                                          itemsTitle,
+                                          selectedCell,
+                                          StatusTypeCollectionView,
+                                          WeightViewController.name)
         collectionViewSetup.performSegueClosure = performSegue(withIdentifier:sender:)
     }
     
@@ -39,15 +45,19 @@ class StatusTypeViewController: UIViewController {
     @IBAction func helpButtonTapped(_ sender: UIButton) {
     }
     
+    fileprivate func selectedCell(_ statusType: StatusType) {
+        self.calculateModel?.status = statusType
+    }
+    
 }
 
 // MARK: - 데이터 전달
 extension StatusTypeViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == DecideFoodTypeViewController.name {
-//            let vc = segue.destination as! DecideFoodTypeViewController
-//            // 전달할 데이터
-//        }
+        if segue.identifier == WeightViewController.name {
+            let vc = segue.destination as! WeightViewController
+            vc.calculateModel = calculateModel
+        }
     }
 }
 

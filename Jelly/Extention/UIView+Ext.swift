@@ -18,51 +18,34 @@ extension UIView {
             self.addSubview(view)
         }
     }
+}
 
+extension UIStackView {
     
-    /// 반려동물 식사 타입이 단일인 경우에 맞춰서 CustomTextFieldView를 생성 및 리턴
-    /// - Parameter firstConfiguration: 첫번째 커스텀뷰 구성 (타입, 버튼 이벤트, 텍스트필드 이벤트)
-    static func makeSingleView(_ configuration: (CustomType, Bool?, ((String) -> Void)?)) -> UIView {
+    /// 스택뷰 생성
+    /// - Parameters:
+    ///   - views: 스택뷰에 넣을 뷰
+    ///   - spacing: 각 뷰 사이의 거리
+    static func combineInputView(views: [UIView]) -> UIView {
         
-        let singleInput = CustomTextFieldView(type: configuration.0,
-                                              onButton: configuration.1,
-                                              inputTextFieldData: configuration.2)
-        
-        return singleInput
-    }
-    
-    /// FoodType(.Mix)인 경우의 스택뷰를 생성
-    ///   - Parameter firstConfiguration: 첫번째 커스텀뷰 구성 (타입, 버튼 이벤트, 텍스트필드 이벤트)
-    ///   - Parameter secondConfiguration: 두번째 커스텀뷰 구성 (타입, 버튼 이벤트, 텍스트필드 이벤트)
-    ///   - Parameter spacing: 스택뷰 요소의 거리
-    ///   - Returns: 스택뷰
-    static func makeMixView(_ firstConfiguration: (CustomType, Bool?, ((String) -> Void)?),
-                            _ secondConfiguration: (CustomType, Bool?, ((String) -> Void)?),
-                            _ spacing: CGFloat = 50) -> UIView {
-        
-        let firstInput = CustomTextFieldView(type: firstConfiguration.0,
-                                             onButton: firstConfiguration.1,
-                                             inputTextFieldData: firstConfiguration.2)
-    
-        let secondInput = CustomTextFieldView(type: secondConfiguration.0,
-                                              onButton: secondConfiguration.1,
-                                              inputTextFieldData: secondConfiguration.2)
-        
-        let inputStackView = UIStackView(arrangedSubviews: [firstInput, secondInput]).then {
+        let inputStackView = UIStackView(arrangedSubviews: views).then {
             $0.axis = .vertical
-            $0.spacing = spacing
+            $0.spacing = 50
             $0.distribution = .fill
             $0.alignment = .fill
         }
         
         return inputStackView
     }
-}
-
-extension UIStackView {
     
-    static func makeResultView(_ addView: UIView) -> UIStackView {
-        let calorieView = CustomTextFieldView(type: .outputOfType(outputType: .normal))
+    static func combineOutputView(topView: UIView, bottomView: UIView?, adequateCalorie: String?) -> UIStackView {
+        
+        let requiredView = CustomTextFieldView(userTextField: false).then {
+            $0.setting(mainTitle: "하루 적정 칼로리")
+            
+            // 적정 칼로리 계산로직 후
+            $0.inputTextFieldValue = adequateCalorie
+        }
         
         let infoLabel = UILabel().then {
             $0.text = "급여량은 최소 2 ~ 3회에 나눠서 급여를 추천드립니다."
@@ -77,7 +60,9 @@ extension UIStackView {
             $0.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         }
         
-        lazy var infoStackView = UIStackView(arrangedSubviews: [calorieView, addView, labelStackViewForInset]).then {
+        let resultView = [requiredView, topView, bottomView, labelStackViewForInset].compactMap { $0 }
+        
+        lazy var infoStackView = UIStackView(arrangedSubviews: resultView).then {
             $0.axis = .vertical
             $0.spacing = 20
             

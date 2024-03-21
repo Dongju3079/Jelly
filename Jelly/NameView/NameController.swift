@@ -10,6 +10,11 @@ import UIKit
 class NameController: UIViewController {
     
     // MARK: - Variables
+    
+    // 로컬데이터에서 모든 ResultSection.name 목록 가져오기
+    
+    var calculateModel = ResultModel()
+    
     var nameArray: [String] = ["짱아", "나비", "+"]
     var beforeGauge: Float = 0.0
     var nextGauge: Float = 0.2
@@ -24,6 +29,7 @@ class NameController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         configuraCollectionView()
         progressBar.setupProgressBar(progressBar, 0.0, 0.2)
     }
@@ -34,7 +40,7 @@ extension NameController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == FoodTypeViewController.name {
             let vc = segue.destination as! FoodTypeViewController
-            // 전달할 데이터
+            vc.calculateModel = calculateModel
         }
     }
 }
@@ -75,6 +81,7 @@ extension NameController: UICollectionViewDelegateFlowLayout {
 extension NameController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(#fileID, #function, #line, "- ")
+        self.calculateModel.name = nameArray[indexPath.item]
         
         if indexPath.item == (self.nameArray.count-1) {
             addNameAlert()
@@ -125,7 +132,9 @@ extension NameController {
 extension NameController {
     fileprivate func newName(_ newName: String) {
         
-    
+    // 로컬 데이터쪽에 allData.data에 새로운 ResultSection 넣어주기
+    // ResultModel 생성 및 name 입력
+        
         if let firstItem = snapShot.itemIdentifiers(inSection: 0).first {
             self.nameArray.insert(newName, at: 0)
             snapShot.insertItems([newName], beforeItem: firstItem)
