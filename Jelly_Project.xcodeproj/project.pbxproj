@@ -79,6 +79,7 @@
 		52B21AF22BE809180017C2E9 /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 52B21AF12BE809180017C2E9 /* SwiftEntryKit */; };
 		52B21AF52BE809210017C2E9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52B21AF42BE809210017C2E9 /* RealmSwift */; };
 		52B21AF62BE8094D0017C2E9 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 52B21AF42BE809210017C2E9 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		80F28E79AB5913B76E497146 /* Pods_Jelly_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D230601ACD93232F3B68E614 /* Pods_Jelly_Project.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,6 +97,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		22254294F3178C0EB2BC65F6 /* Pods-Jelly_Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jelly_Project.release.xcconfig"; path = "Target Support Files/Pods-Jelly_Project/Pods-Jelly_Project.release.xcconfig"; sourceTree = "<group>"; };
 		52B21A1D2BE8081F0017C2E9 /* Jelly_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jelly_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B21A202BE8081F0017C2E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52B21A222BE8081F0017C2E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +166,8 @@
 		52B21AC12BE808F40017C2E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52B21AC42BE808F40017C2E9 /* ResultViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ResultViewController.storyboard; sourceTree = "<group>"; };
 		52B21AC52BE808F40017C2E9 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		BEBD27C69654AABC3A920C87 /* Pods-Jelly_Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jelly_Project.debug.xcconfig"; path = "Target Support Files/Pods-Jelly_Project/Pods-Jelly_Project.debug.xcconfig"; sourceTree = "<group>"; };
+		D230601ACD93232F3B68E614 /* Pods_Jelly_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jelly_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,17 +180,30 @@
 				52B21AE92BE809080017C2E9 /* SwipeCellKit in Frameworks */,
 				52B21AF52BE809210017C2E9 /* RealmSwift in Frameworks */,
 				52B21AEC2BE8090C0017C2E9 /* Then in Frameworks */,
+				80F28E79AB5913B76E497146 /* Pods_Jelly_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1262A807819B3999BF8CB90A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BEBD27C69654AABC3A920C87 /* Pods-Jelly_Project.debug.xcconfig */,
+				22254294F3178C0EB2BC65F6 /* Pods-Jelly_Project.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		52B21A142BE8081F0017C2E9 = {
 			isa = PBXGroup;
 			children = (
 				52B21A1F2BE8081F0017C2E9 /* Jelly_Project */,
 				52B21A1E2BE8081F0017C2E9 /* Products */,
+				1262A807819B3999BF8CB90A /* Pods */,
+				7EEF207105512849C8CFC216 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -704,6 +721,14 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		7EEF207105512849C8CFC216 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D230601ACD93232F3B68E614 /* Pods_Jelly_Project.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -711,10 +736,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52B21A312BE8081F0017C2E9 /* Build configuration list for PBXNativeTarget "Jelly_Project" */;
 			buildPhases = (
+				EB64AAF96623A6B53392801F /* [CP] Check Pods Manifest.lock */,
 				52B21A192BE8081F0017C2E9 /* Sources */,
 				52B21A1A2BE8081F0017C2E9 /* Frameworks */,
 				52B21A1B2BE8081F0017C2E9 /* Resources */,
 				52B21AF72BE8094D0017C2E9 /* Embed Frameworks */,
+				2C95F56C780CD0CA45A2CA54 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -759,9 +786,9 @@
 			packageReferences = (
 				52B21AE72BE809080017C2E9 /* XCRemoteSwiftPackageReference "SwipeCellKit" */,
 				52B21AEA2BE8090C0017C2E9 /* XCRemoteSwiftPackageReference "Then" */,
-				52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
 				52B21AF02BE809180017C2E9 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */,
-				52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift.git" */,
 			);
 			productRefGroup = 52B21A1E2BE8081F0017C2E9 /* Products */;
 			projectDirPath = "";
@@ -792,6 +819,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2C95F56C780CD0CA45A2CA54 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jelly_Project/Pods-Jelly_Project-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jelly_Project/Pods-Jelly_Project-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jelly_Project/Pods-Jelly_Project-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB64AAF96623A6B53392801F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Jelly_Project-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		52B21A192BE8081F0017C2E9 /* Sources */ = {
@@ -999,6 +1068,7 @@
 		};
 		52B21A322BE8081F0017C2E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BEBD27C69654AABC3A920C87 /* Pods-Jelly_Project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1032,6 +1102,7 @@
 		};
 		52B21A332BE8081F0017C2E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22254294F3178C0EB2BC65F6 /* Pods-Jelly_Project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1103,7 +1174,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -1119,7 +1190,7 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -1142,7 +1213,7 @@
 		};
 		52B21AEE2BE809130017C2E9 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
 			productName = SnapKit;
 		};
 		52B21AF12BE809180017C2E9 /* SwiftEntryKit */ = {
@@ -1152,7 +1223,7 @@
 		};
 		52B21AF42BE809210017C2E9 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
