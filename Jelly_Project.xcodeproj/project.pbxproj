@@ -193,7 +193,6 @@
 				BEBD27C69654AABC3A920C87 /* Pods-Jelly_Project.debug.xcconfig */,
 				22254294F3178C0EB2BC65F6 /* Pods-Jelly_Project.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -558,13 +557,13 @@
 			path = CollectionView;
 			sourceTree = "<group>";
 		};
-		52B21A9F2BE808F40017C2E9 /* CollectionView */ = {
+		52B21A9F2BE808F40017C2E9 /* SelectCollection */ = {
 			isa = PBXGroup;
 			children = (
 				52B21A9B2BE808F40017C2E9 /* CollectionCell */,
 				52B21A9E2BE808F40017C2E9 /* CollectionView */,
 			);
-			path = CollectionView;
+			path = SelectCollection;
 			sourceTree = "<group>";
 		};
 		52B21AA42BE808F40017C2E9 /* CommonView */ = {
@@ -593,7 +592,7 @@
 		52B21AAB2BE808F40017C2E9 /* ReuseView */ = {
 			isa = PBXGroup;
 			children = (
-				52B21A9F2BE808F40017C2E9 /* CollectionView */,
+				52B21A9F2BE808F40017C2E9 /* SelectCollection */,
 				52B21AA42BE808F40017C2E9 /* CommonView */,
 				52B21AAA2BE808F40017C2E9 /* CustomTextFieldView */,
 			);
@@ -683,9 +682,9 @@
 		52B21ABD2BE808F40017C2E9 /* Enter */ = {
 			isa = PBXGroup;
 			children = (
-				52B21AAF2BE808F40017C2E9 /* Calorie */,
 				52B21AB92BE808F40017C2E9 /* Select */,
 				52B21ABC2BE808F40017C2E9 /* Weight */,
+				52B21AAF2BE808F40017C2E9 /* Calorie */,
 			);
 			path = Enter;
 			sourceTree = "<group>";
@@ -714,8 +713,8 @@
 			isa = PBXGroup;
 			children = (
 				52B21AAC2BE808F40017C2E9 /* Component */,
-				52B21ABD2BE808F40017C2E9 /* Enter */,
 				52B21AC32BE808F40017C2E9 /* Main */,
+				52B21ABD2BE808F40017C2E9 /* Enter */,
 				52B21AC62BE808F40017C2E9 /* Result */,
 			);
 			path = Presentation;
@@ -786,9 +785,9 @@
 			packageReferences = (
 				52B21AE72BE809080017C2E9 /* XCRemoteSwiftPackageReference "SwipeCellKit" */,
 				52B21AEA2BE8090C0017C2E9 /* XCRemoteSwiftPackageReference "Then" */,
-				52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				52B21AF02BE809180017C2E9 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */,
-				52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift.git" */,
+				52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 52B21A1E2BE8081F0017C2E9 /* Products */;
 			projectDirPath = "";
@@ -1174,7 +1173,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -1190,7 +1189,7 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
+		52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -1213,7 +1212,7 @@
 		};
 		52B21AEE2BE809130017C2E9 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = 52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 		52B21AF12BE809180017C2E9 /* SwiftEntryKit */ = {
@@ -1223,7 +1222,7 @@
 		};
 		52B21AF42BE809210017C2E9 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

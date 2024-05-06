@@ -9,6 +9,10 @@ import UIKit
 import SnapKit
 import Then
 
+protocol InputDelegate: NSObject {
+    func inputTextFieldEvent(calorie: Double, foodType: FoodType)
+}
+
 class CustomTextFieldView: UIView {
     
     enum UsePlace {
@@ -18,7 +22,7 @@ class CustomTextFieldView: UIView {
 
     // MARK: - Variables
     
-    var inputTextFieldEvent: ((Double, FoodType) -> Void)?
+    weak var inputDelegate: InputDelegate?
     var batonTouchView : CustomTextFieldView?
 
     var viewType: FoodType?
@@ -35,6 +39,24 @@ class CustomTextFieldView: UIView {
     let unitButton = CustomButton(type: .empty).then {
         $0.setContentCompressionResistancePriority(.init(750), for: .horizontal)
         $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    }
+    
+    fileprivate func setupMenu() -> UIMenu {
+        
+        let menu = UIMenu(title: "단위를 선택하세요.",children: [
+            UIAction(title: "Kg(단위)", handler: { _ in //[weak self] _ in
+//                guard let self = self else { return }
+//                target.setTitle("Kg(단위) ", for: .normal)
+                
+//                self.dataManager?.currentDetailInfo?.dryFeedUnit = 1_000.0
+            }),
+            UIAction(title: "g(단위)", handler: { _ in
+//                target.setTitle("g(단위) ", for: .normal)
+//                self.dataManager?.currentDetailInfo?.dryFeedUnit = 1.0
+            })
+        ])
+        
+        return menu
     }
     
     private let nameLabel = UILabel().then {
@@ -68,14 +90,16 @@ class CustomTextFieldView: UIView {
         super.init(frame: .zero)
         self.viewType = viewType
         self.setupAppearance(place: usePlace)
-        self.inputTextFieldEvent = inputTextFieldData
-        self.inputTextfield.delegate = self
         setupTextFieldBaton(nextField: batonTouchView)
         setupUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("테스트 \(self)이 해제됩니다.")
     }
     
     override func draw(_ rect: CGRect) {
@@ -125,6 +149,19 @@ extension CustomTextFieldView {
         nameLabel.snp.makeConstraints { make in
             make.width.equalTo(unitButton.snp.width)
                 .priority(.init(749))
+        }
+    }
+    
+    fileprivate func setupAppearance(place: UsePlace) {
+        switch place {
+        case .input:
+            infoLabel.setupColor(UIColorSet.text(.black))
+            inputTextfield.font = UIFont(customStyle: .bold, size: 30)
+            textfieldStackView.backgroundColor = .white
+        case .output:
+            infoLabel.setupColor(UIColorSet.text(.green3))
+            inputTextfield.font = UIFont(customStyle: .bold, size: 20)
+            textfieldStackView.backgroundColor = UIColorSet.background(.green)
         }
     }
     
@@ -197,21 +234,9 @@ extension CustomTextFieldView {
         }
     }
     
-  
     
-    func setupAppearance(place: UsePlace) {
-        switch place {
-        case .input:
-            infoLabel.setupColor(UIColorSet.text(.black))
-            inputTextfield.font = UIFont(customStyle: .bold, size: 30)
-            textfieldStackView.backgroundColor = .white
-        case .output:
-            infoLabel.setupColor(UIColorSet.text(.green3))
-            inputTextfield.font = UIFont(customStyle: .bold, size: 20)
-            textfieldStackView.backgroundColor = UIColorSet.background(.green)
-        }
-    }
     
+    // MARK: - TextField Respon
     func becomeTextFieldResponder() {
         self.inputTextfield.becomeFirstResponder()
     }
@@ -220,6 +245,8 @@ extension CustomTextFieldView {
         self.inputTextfield.resignFirstResponder()
     }
     
+    
+    // MARK: - 텍스트 체크
     /// 텍스트 비었는지를 전달
     /// - Returns: Empty(true) / fill(false)
     func checkEmptyTextField() -> Bool {
@@ -242,7 +269,6 @@ extension CustomTextFieldView {
 
 extension CustomTextFieldView {
     
-    
     /// 좌측 레이블 X, 우측 버튼 사용시에 활용 (좌측 레이블의 Text는 없지만 Width는 존재(텍스트 필드 중앙화를 위해서))
     fileprivate func setNameLabelTouch() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(labelGesture(sender:)))
@@ -263,9 +289,9 @@ extension CustomTextFieldView {
         
         if let textData = sender.text,
            let calorie = Double(textData) {
-            inputTextFieldEvent?(calorie, viewType)
+            inputDelegate?.inputTextFieldEvent(calorie: calorie, foodType: viewType)
         } else {
-            inputTextFieldEvent?(0, viewType)
+            inputDelegate?.inputTextFieldEvent(calorie: 0.0, foodType: viewType)
         }
     }
 }
@@ -289,5 +315,4 @@ extension CustomTextFieldView {
         textfieldStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
     }
 }
-
 

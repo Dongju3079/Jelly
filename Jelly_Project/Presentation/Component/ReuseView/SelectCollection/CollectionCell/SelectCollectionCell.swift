@@ -8,7 +8,13 @@
 import Foundation
 import UIKit
 
+protocol DeleteDelegate: NSObject {
+    func deleteButtonClosure(_ deleteItem: Selectable) -> Void
+}
+
 class SelectCollectionCell: UICollectionViewCell {
+    
+    weak var delegate: DeleteDelegate?
 
     var useCase: Selectable? {
         didSet {
@@ -16,8 +22,6 @@ class SelectCollectionCell: UICollectionViewCell {
             nameLabel.text = useCase.title
         }
     }
-    
-    var deleteButtonClosure: ((Selectable) -> Void)?
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeImage: UIImageView!
@@ -64,6 +68,6 @@ class SelectCollectionCell: UICollectionViewCell {
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
         guard let useCase = useCase else { return }
 
-        deleteButtonClosure?(useCase)
+        delegate?.deleteButtonClosure(useCase)
     }
 }

@@ -17,7 +17,7 @@ class CustomButton: UIButton {
     }
     
     var useType: UseType?
-
+    
     init(type: UseType) {
         super.init(frame: .zero)
         self.useType = type
@@ -27,6 +27,10 @@ class CustomButton: UIButton {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("👾 테스트 : 버튼이 해제됩니닫. 👾")
     }
     
     fileprivate func setDefault() {

@@ -10,24 +10,19 @@ import UIKit
 
 extension UIMenu {
     
-    static func setupMenu(currentView: CustomTextFieldView,
-                               linkView: CustomTextFieldView,
-                               dataManager: DataManager) -> Self? {
-        let maxCount = dataManager.wetFeedMaxCount()
+    static func setupCountMenu(action: ((Int) -> UIAction)? = nil,
+                               maxCount: Int) -> UIMenu? {
         
+        var actions: [UIAction] = []
         if maxCount >= 1 {
-            let currentMenuCount = 0...maxCount
-            
-            let actions = currentMenuCount.map { count in
-                UIAction(title: "\(count)캔 급여") { _ in
-                    currentView.setupTextFieldText(text: "\(count) 캔")
-                    linkView.setupTextFieldText(text: dataManager.dryFeedAmountOfWetFeedCount(count))
-                }
+            for count in 0...maxCount {
+                guard let action = action?(count) else { break }
+                actions.append(action)
             }
             
             let menu = UIMenu(title: "습식 갯수", children: actions)
             
-            return menu as? Self
+            return menu
         } else {
             return nil
         }

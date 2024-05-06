@@ -13,6 +13,7 @@ class ResultViewController: UIViewController {
     
     // MARK: - Variables
     private let dataManager = DataManager.shared
+    private var currentTextView: [String: CustomTextFieldView] = [:]
     
     // MARK: - UI components
     
@@ -30,6 +31,10 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    deinit {
+        print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
     }
     
     // MARK: - UI Setup
@@ -69,7 +74,7 @@ class ResultViewController: UIViewController {
     #warning("네비 확장으로 처리하기")
     fileprivate func setupNaviItem() {
         self.title = "결과"
-        self.navigationItem.hidesBackButton = true
+//        self.navigationItem.hidesBackButton = true
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(completeAction))
         
         // navigationItem 글꼴 및 색 설정
@@ -101,14 +106,14 @@ extension ResultViewController {
             $0.setupLeftLabel("건식", true)
             $0.addEmptyView()
             $0.setupTextFieldText(text: dataManager.calculateAmount())
+            self.currentTextView.updateValue($0, forKey: "dryView")
         }
         
         let wetView = CustomTextFieldView(usePlace: .output).then {
             $0.setupTopLabel(mainTitle: "1일 권장 급여량")
-            $0.unitButton.menu = UIMenu.setupMenu(currentView: $0,
-                                                  linkView: dryView,
-                                                  dataManager: dataManager)
-            
+            self.currentTextView.updateValue($0, forKey: "wetView")
+            $0.unitButton.menu = UIMenu.setupCountMenu(action: makeMenuAction(count:),
+                                                  maxCount: dataManager.wetFeedMaxCount())
             $0.buttonConfiguration(type: .numberButton, scale: .large)
             $0.setupLeftLabel("습식")
             $0.setupTextFieldText(text: "1 캔")
@@ -147,5 +152,20 @@ extension ResultViewController {
                             outputResult: dataManager.adequateCalorie()).then({
             calorieView.addArrangedSubview($0)
         })
+    }
+}
+
+// MARK: -  메뉴 셋팅
+extension ResultViewController {
+    fileprivate func makeMenuAction(count: Int) -> UIAction {
+        return UIAction(title: "\(count)캔 급여") { [weak self] _ in
+            if let self = self,
+               let dryView = self.currentTextView["dryView"],
+               let wetView = self.currentTextView["wetView"] {
+                
+                wetView.setupTextFieldText(text: "\(count) 캔")
+                dryView.setupTextFieldText(text: self.dataManager.dryFeedAmountOfWetFeedCount(count))
+            }
+        }
     }
 }

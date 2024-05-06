@@ -10,22 +10,20 @@ import Then
 
 class NameViewController: UIViewController {
     
+    
+    
     // MARK: - Variables
 
     private let dataManager = DataManager.shared
     
     private var menuMode: Bool = false
     private var deleteMode: Bool = false
-    
     private var snapShot = NSDiffableDataSourceSnapshot<Int, ObjectInformation>()
     private var dataSource: UICollectionViewDiffableDataSource<Int, ObjectInformation>? = nil
     
-    private lazy var selectView = SelectCollectionView(enterType: .name,
-                                                       tapAddButton: self.showAddAlert,
-                                                       tapDeleteButton: onEditMode,
-                                                       checkEditMode: checkEditMode)//.then {
-//        $0.setFloaty()
-//    }
+    private lazy var selectView = SelectCollectionView(enterType: .name).then {
+        $0.setFloatyButton(delegate: self)
+    }
     
     // MARK: - LifeCycle
     
@@ -33,20 +31,21 @@ class NameViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         checkEmptyView()
+        print("👾 테스트 네임 : \(self)뷰가 생성되고 있습니다. 👾")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    deinit {
+        print("👾 테스트 네임 : \(self)뷰가 해제되고 있습니다. 👾")
     }
     
     // MARK: - UI Setup
+    
     fileprivate func setupUI() {
         self.title = "이름 선택"
         self.view = selectView
 
         setupNaviItem()
-        configurationCollectionView(nameCollectionView: selectView.collectionView)
+        configurationCollectionView()
     }
     
     fileprivate func setupNaviItem() {
@@ -60,7 +59,6 @@ extension NameViewController {
     
     fileprivate func showAddAlert() {
         AlertManager.shared.addNameAlert(target: self, completion: self.addObject(_:))
-        checkEditMode()
     }
     
     fileprivate func onEditMode() {
@@ -76,29 +74,23 @@ extension NameViewController {
         self.snapShot.reloadSections([0])
         self.dataSource?.apply(snapShot, animatingDifferences: true)
     }
-    
-    fileprivate func checkEditMode() {
-        if deleteMode {
-            changeEditMode()
-        }
-    }
 }
 
 // MARK: - CollectionView Setup
 extension NameViewController {
     
-    fileprivate func configurationCollectionView(nameCollectionView: UICollectionView) {
+    fileprivate func configurationCollectionView() {
 
-        nameCollectionView.delegate = self
+        selectView.collectionView.delegate = self
         
-        dataSource = UICollectionViewDiffableDataSource(collectionView: nameCollectionView, cellProvider: { [weak self] collectionView, indexPath, item in
+        dataSource = UICollectionViewDiffableDataSource(collectionView: selectView.collectionView, cellProvider: { [weak self] collectionView, indexPath, item in
             
             guard let self = self else { return UICollectionViewCell() }
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectCollectionCell.name, for: indexPath) as? SelectCollectionCell else { return UICollectionViewCell() }
             
-            cell.deleteButtonClosure = deleteObject(_:)
-            cell.showDeleteButton(self.deleteMode)
+            cell.delegate = self
+            cell.showDeleteButton(deleteMode)
             cell.useCase = item
             
             return cell
@@ -125,6 +117,15 @@ extension NameViewController: UICollectionViewDelegateFlowLayout {
         let cellSize = (fullWidth / 2) - 5
         return CGSize(width: cellSize, height: cellSize)
     }
+}
+
+// MARK: - Helper
+extension NameViewController {
+    
+    fileprivate func checkEmptyView() {
+        selectView.emptyLabel.isHidden = !dataManager.checkObjectDataEmpty()
+    }
+    
 }
 
 // MARK: - 화면이동
@@ -164,8 +165,33 @@ extension NameViewController {
             snapShot.appendItems([newItem], toSection: 0)
         }
     }
+}
+
+// MARK: - 플로팅 버튼 액션
+extension NameViewController: FloatySelectDelegate {
+    func tapDeleteButton() {
+        deleteMode = true
+        
+        let FloatySelectable = 10
+        
+        self.snapShot.reloadSections([0])
+        self.dataSource?.apply(snapShot, animatingDifferences: true)
+    }
     
-    fileprivate func deleteObject(_ deleteItem: Selectable) {
+    func tapAddButton() {
+        print("👾 테스트 : 탭 메서드 실행 👾")
+        AlertManager.shared.addNameAlert(target: self, completion: self.addObject(_:))
+    }
+    
+    func checkDeleteMode() {
+        if deleteMode {
+            changeEditMode()
+        }
+    }
+}
+extension NameViewController: DeleteDelegate {
+    
+    func deleteButtonClosure(_ deleteItem: Selectable) {
 
         guard let deleteItem = deleteItem as? ObjectInformation else { return }
         dataManager.deleteObjectToDB(deleteItem)
@@ -175,10 +201,10 @@ extension NameViewController {
     }
 }
 
-extension NameViewController {
-    
-    fileprivate func checkEmptyView() {
-        selectView.emptyLabel.isHidden = !dataManager.checkObjectDataEmpty()
+extension NameViewController: UIScrollViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("테스트 Y : \(scrollView.contentOffset.y)")
+        self.selectView.showMaskingView(offSet: scrollView.contentOffset.y)
     }
-    
 }

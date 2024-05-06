@@ -14,14 +14,12 @@ class CalorieViewController: UIViewController, KeyboardEvent {
     var transformScrollView: UIScrollView { return self.inputScrollView }
     var transformView: UIView { return self.view }
 
-    private var responderTextField: CustomTextFieldView?
+    private weak var responderTextField: CustomTextFieldView?
     private var currentTextField: [CustomTextFieldView] = []
     
-    private let dataManager = DataManager.shared
+    private weak var dataManager = DataManager.shared
         
     // MARK: - UI components
-    
-
     @IBOutlet weak var commonView: CommonView!
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var inputScrollView: UIScrollView!
@@ -51,6 +49,10 @@ class CalorieViewController: UIViewController, KeyboardEvent {
         responderTextField.becomeTextFieldResponder()
     }
     
+    deinit {
+        print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
+    }
+    
     // MARK: - UI Setup
     
     fileprivate func setupUI() {
@@ -67,7 +69,7 @@ class CalorieViewController: UIViewController, KeyboardEvent {
     /// 타입에 따라서 뷰 생성
     /// - Parameter elements: 반려동물 식사 타입
     fileprivate func createTypeView() {
-        guard let detailInfo = dataManager.currentDetailInfo,
+        guard let detailInfo = dataManager?.currentDetailInfo,
               let foodType = detailInfo.foodType else { return }
         
         commonView.setCalorieViewInfoLabel(foodType)
@@ -101,9 +103,6 @@ class CalorieViewController: UIViewController, KeyboardEvent {
     // MARK: - 빈 공간 터치시 키보드 내리기
     fileprivate func setupGesture() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(endEditAction))
-        
-        // view에 제스처를 먼저 적용한 경우 정상적으로 적용이 되지 않음 (이유는 X)
-        self.inputStackView.addGestureRecognizer(gesture)
         self.view.addGestureRecognizer(gesture)
     }
     
@@ -113,6 +112,7 @@ class CalorieViewController: UIViewController, KeyboardEvent {
     
     // MARK: - 화면이동
     @objc fileprivate func popViewController() {
+        self.commonView.downGaugeAtPop()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -120,7 +120,7 @@ class CalorieViewController: UIViewController, KeyboardEvent {
         if checkInputValue() {
             resetGlobalFigure()
             guard let navigation = self.navigationController as? CustomNavigation else { return }
-            dataManager.saveDataToDB()
+            dataManager?.saveDataToDB()
             navigation.pushToViewController(destinationVCCase: .result)
         }
     }
@@ -131,13 +131,12 @@ class CalorieViewController: UIViewController, KeyboardEvent {
     }
 }
 
-
 // MARK: - 타입에 맞춰서 뷰 생성하기
 extension CalorieViewController {
     
     fileprivate func makeWetTypeView() {
-        _ = CustomTextFieldView(viewType: .wet,
-                                inputTextFieldData: insertCalorie(calorie:foodType:)).then {
+        _ = CustomTextFieldView(viewType: .wet).then {
+            $0.inputDelegate = self
             $0.setupTopLabel(mainTitle: "습식", subTitle: "칼로리(Kcal)")
             addViewAtInputStackView(inputView: $0, responderView: $0)
             currentTextField.append($0)
@@ -145,10 +144,10 @@ extension CalorieViewController {
     }
     
     fileprivate func makeDryTypeView() {
-        _ = CustomTextFieldView(viewType: .dry,
-                                inputTextFieldData: insertCalorie(calorie:foodType:)).then {
+        _ = CustomTextFieldView(viewType: .dry).then {
+            $0.inputDelegate = self
             $0.buttonConfiguration(type: .unitButton, title: "Kg(단위) ")
-            $0.unitButton.menu = setupMenu($0.unitButton)
+            $0.unitButton.menu = setupUintMenu(target: $0.unitButton)
             $0.setupTopLabel(mainTitle: "건식", subTitle: "칼로리(Kcal)")
             addViewAtInputStackView(inputView: $0, responderView: $0)
             currentTextField.append($0)
@@ -156,25 +155,24 @@ extension CalorieViewController {
     }
     
     fileprivate func makeMixTypeView() {
-        let dryType = CustomTextFieldView(viewType: .dry,
-                                          inputTextFieldData: insertCalorie(calorie:foodType:)).then {
+        let dryType = CustomTextFieldView(viewType: .dry).then {
+            $0.inputDelegate = self
             $0.buttonConfiguration(type: .unitButton, title: "Kg(단위) ")
-            $0.unitButton.menu = setupMenu($0.unitButton)
+            $0.unitButton.menu = setupUintMenu(target: $0.unitButton)
             $0.setupTopLabel(mainTitle: "건식", subTitle: "칼로리(Kcal)")
+            currentTextField.append($0)
         }
         
         let wetType = CustomTextFieldView(viewType: .wet,
-                                          inputTextFieldData: insertCalorie(calorie:foodType:),
                                           batonTouchView: dryType).then {
+            $0.inputDelegate = self
             $0.setupTopLabel(mainTitle: "습식", subTitle: "칼로리(Kcal)")
+            currentTextField.append($0)
         }
-        
-        let views = [wetType, dryType]
-        
-        currentTextField.append(contentsOf: views)
+
         
         _ = CustomStackView(type: .input,
-                            views: views).then({
+                            views: [wetType, dryType]).then({
             addViewAtInputStackView(inputView: $0, responderView: wetType)
         })
     }
@@ -185,41 +183,23 @@ extension CalorieViewController {
     
     /// FoodType 중 .dry인 경우 사료 칼로리의 단위를 Kg, g 중 택 1
     /// - Returns: 메뉴
-    fileprivate func setupMenu(_ target: UIButton) -> UIMenu {
+    fileprivate func setupUintMenu(target: UIButton) -> UIMenu {
         
         let menu = UIMenu(title: "단위를 선택하세요.",children: [
-            UIAction(title: "Kg(단위)", handler: { _ in
+            UIAction(title: "Kg(단위)", handler: { [weak self] _ in
+                guard let self = self else { return }
                 target.setTitle("Kg(단위) ", for: .normal)
                 
-                self.dataManager.currentDetailInfo?.dryFeedUnit = 1_000.0
+                self.dataManager?.currentDetailInfo?.dryFeedUnit = 1_000.0
             }),
-            UIAction(title: "g(단위)", handler: { _ in
+            UIAction(title: "g(단위)", handler: { [weak self] _ in
+                guard let self = self else { return }
                 target.setTitle("g(단위) ", for: .normal)
-                self.dataManager.currentDetailInfo?.dryFeedUnit = 1.0
+                self.dataManager?.currentDetailInfo?.dryFeedUnit = 1.0
             })
         ])
         
         return menu
-    }
-}
-
-// MARK: - 텍스트필드 이벤트
-extension CalorieViewController {
-    
-    /// 습식, 건식에 맞춰서 데이터에 입력
-    /// - Parameters:
-    ///   - calorie: 먹이 칼로리
-    ///   - foodType: 먹이 타입
-    fileprivate func insertCalorie(calorie: Double, foodType: FoodType) {
-        
-        switch foodType {
-        case .wet:
-            self.dataManager.currentDetailInfo?.wetFeedCalorie = calorie
-        case .dry:
-            self.dataManager.currentDetailInfo?.dryFeedCalorie = calorie
-        case .mix:
-            break
-        }
     }
 }
 
@@ -285,9 +265,7 @@ extension CalorieViewController {
         AlertManager.shared.defaultAlert(target: self,
                                          title: nil,
                                          message: "입력된 값이 없습니다.",
-                                         style: .alert) { _ in
-            textField.becomeFirstResponder()
-        }
+                                         style: .alert)
     }
 }
 
@@ -302,7 +280,10 @@ extension CalorieViewController {
 extension CalorieViewController {
     func checkEmptyTextField(_ textField: UITextField, _ hasText: Bool) {
         if hasText {
-            guard let emptyTextField = findEmptyTextField() else { return }
+            guard let emptyTextField = findEmptyTextField() else {
+                    textField.resignFirstResponder()
+                return
+            }
             
             emptyTextField.becomeTextFieldResponder()
             
@@ -312,4 +293,18 @@ extension CalorieViewController {
     }
 }
 
+extension CalorieViewController: InputDelegate {
+    func inputTextFieldEvent(calorie: Double, foodType: FoodType) {
+        switch foodType {
+         case .wet:
+             dataManager?.currentDetailInfo?.wetFeedCalorie = calorie
+         case .dry:
+             dataManager?.currentDetailInfo?.dryFeedCalorie = calorie
+         case .mix:
+             break
+         }
+    }
+    
+    
+}
 

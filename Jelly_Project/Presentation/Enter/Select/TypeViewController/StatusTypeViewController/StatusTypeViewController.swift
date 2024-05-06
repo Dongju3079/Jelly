@@ -12,12 +12,15 @@ class StatusTypeViewController: UIViewController {
     
     // MARK: - Variables
     static private var currentViewPriority: Int = 0
+    
+    private var currentTypes: [StatusType] = []
 
     private let dataManager = DataManager.shared
     private let collectionViewSetup = TypeCollectionViewConfiguration()
 
     // MARK: - UI components
-    private lazy var selectView = SelectCollectionView(enterType: .status, tapTipButton: tipButtonTapped(_:)).then {
+    private lazy var selectView = SelectCollectionView(enterType: .status).then {
+        $0.setTipButton(delegate: self)
         $0.setTipButtonTag(num: Self.currentViewPriority)
     }
     
@@ -25,6 +28,10 @@ class StatusTypeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    deinit {
+        print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
     }
     
     // MARK: - UI Setup
@@ -41,11 +48,10 @@ class StatusTypeViewController: UIViewController {
     
     fileprivate func setupCollectionView() {
         
-        let statusTypes = StatusType.getAllTypesOfPriority(priority: StatusTypeViewController.currentViewPriority)
+        self.currentTypes = StatusType.getAllTypesOfPriority(priority: StatusTypeViewController.currentViewPriority)
         
-        collectionViewSetup.configuration(items: statusTypes,
-                                          selectedClosure: selectedCell(_:),
-                                          collectionView: selectView.collectionView)
+        selectView.collectionView.delegate = self
+        selectView.collectionView.dataSource = self
     }
 
     
@@ -83,8 +89,11 @@ extension StatusTypeViewController {
     }
     
     fileprivate func pushReselectVC() {
+        
+        guard let navigation = self.navigationController as? CustomNavigation else { return }
+        
         StatusTypeViewController.upReuseCount()
-        self.navigationController?.pushViewController(StatusTypeViewController(), animated: true)
+        navigation.pushToViewController(destinationVCCase: .status)
     }
     
     @objc fileprivate func popViewController() {
@@ -123,4 +132,49 @@ extension StatusTypeViewController {
             selectView.downGaugeAtPop()
         }
     }
+}
+
+extension StatusTypeViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return currentTypes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectCollectionCell.name, for: indexPath) as? SelectCollectionCell else {
+            return UICollectionViewCell() }
+        
+        cell.useCase = currentTypes[indexPath.item]
+        return cell
+    }
+}
+
+extension StatusTypeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let selectType = currentTypes[indexPath.item]
+        selectedCell(selectType)
+    }
+}
+
+extension StatusTypeViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let fullWidth = collectionView.frame.width
+        let cellSize = (fullWidth / 2) - 5
+        return CGSize(width: cellSize, height: cellSize)
+    }
+}
+
+extension StatusTypeViewController: TipSelectDelegate {
+    func tapTipButton(tag: Int) {
+        switch tag {
+        case 0:
+            CustomPopup.shared.showCustomPopup(type: .ageTip)
+        default:
+            CustomPopup.shared.showCustomPopup(type: .obesityTip)
+        }
+    }
+    
+    
 }

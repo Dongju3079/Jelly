@@ -16,9 +16,7 @@ class WeightViewController: UIViewController {
     
     // MARK: - UI components
     
-    
     @IBOutlet weak var commonView: CommonView!
-    
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var selectView: UIView!
     
@@ -27,6 +25,10 @@ class WeightViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    deinit {
+        print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
     }
     
     fileprivate func setupUI() {
@@ -38,8 +40,8 @@ class WeightViewController: UIViewController {
     }
     
     fileprivate func setCommonView(_ enterType: EnterType) {
-        self.commonView.configuration(enterType: enterType,
-                                      tipButtonTapped: tipButtonTapped(_:))
+        self.commonView.configuration(enterType: enterType)
+        self.commonView.setTipButton(tipButtonDelegate: self)
     }
     
     fileprivate func setupPickerView() {
@@ -68,10 +70,6 @@ class WeightViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = .getItem(mode: .right, target: self, action: #selector(completeAction))
 
     }
-    
-    fileprivate func tipButtonTapped(_ sender: UIButton) {
-        CustomPopup.shared.showCustomPopup(type: .weight)
-    }
 }
 
 // MARK: - 화면이동
@@ -79,6 +77,7 @@ class WeightViewController: UIViewController {
 extension WeightViewController {
     
     @objc fileprivate func popViewController() {
+        self.commonView.downGaugeAtPop()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -117,4 +116,10 @@ extension WeightViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         self.dataManager.currentDetailInfo?.weight = weightArray[row]
     }
 
+}
+
+extension WeightViewController: TipSelectDelegate {
+    func tapTipButton(tag: Int) {
+        CustomPopup.shared.showCustomPopup(type: .weight)
+    }
 }

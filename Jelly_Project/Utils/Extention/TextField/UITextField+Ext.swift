@@ -29,8 +29,6 @@ extension UITextField {
     }
     
     @objc fileprivate func doneButtonAction() {
-        self.resignFirstResponder()
-
         checkEmptyTextField(self.hasText)
     }
     

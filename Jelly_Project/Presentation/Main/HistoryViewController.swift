@@ -51,6 +51,10 @@ class HistoryViewController: UIViewController {
         enterButton.layer.cornerRadius = enterButton.frame.width / 2
     }
     
+    deinit {
+        print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
+    }
+    
     // MARK: - UI Setup
     
     fileprivate func setupUI() {
@@ -100,6 +104,7 @@ extension HistoryViewController {
     
     fileprivate func configurationTableView() {
         historyTableView.delegate = self
+        historyTableView.showsVerticalScrollIndicator = false
         historyTableView.register(HistoryTableViewHeaderView.self, forHeaderFooterViewReuseIdentifier: HistoryTableViewHeaderView.name)
         historyTableView.sectionHeaderHeight = 0
         historyTableView.sectionFooterHeight = 0

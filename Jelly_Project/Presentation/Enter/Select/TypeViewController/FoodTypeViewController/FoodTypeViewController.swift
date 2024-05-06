@@ -24,6 +24,10 @@ class FoodTypeViewController: UIViewController {
         setupUI()
     }
     
+    deinit {
+        print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
+    }
+    
     // MARK: - UI Setup
     
     fileprivate func setupUI() {
@@ -38,10 +42,9 @@ class FoodTypeViewController: UIViewController {
     }
     
     fileprivate func setupCollectionView() {
+        selectView.collectionView.delegate = self
+        selectView.collectionView.dataSource = self
         
-        collectionViewSetup.configuration(items: FoodType.allCases,
-                                          selectedClosure: selectedCell(_:),
-                                          collectionView: selectView.collectionView)
     }
     
     // MARK: - 화면 이동
@@ -49,16 +52,46 @@ class FoodTypeViewController: UIViewController {
         selectView.downGaugeAtPop()
         self.navigationController?.popViewController(animated: true)
     }
+}
+
+extension FoodTypeViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return FoodType.allCases.count
+    }
     
-    // MARK: - 셀 선택 액션
-    
-    fileprivate func selectedCell(_ selectType: Selectable) {
-        guard let navigation = self.navigationController as? CustomNavigation,
-              let foodType = selectType as? FoodType else { return }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        dataManager.currentDetailInfo?.foodType = foodType
-        navigation.pushToViewController(destinationVCCase: .status)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectCollectionCell.name, for: indexPath) as? SelectCollectionCell else {
+            return UICollectionViewCell() }
+        
+        cell.useCase = FoodType.allCases[indexPath.item]
+        return cell
     }
 }
 
+extension FoodTypeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let selectType = FoodType.allCases[indexPath.item]
+        pushNextVC(selectType)
+    }
+}
 
+extension FoodTypeViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let fullWidth = collectionView.frame.width
+        let cellSize = (fullWidth / 2) - 5
+        return CGSize(width: cellSize, height: cellSize)
+    }
+}
+
+// MARK: - Helper
+extension FoodTypeViewController {
+    fileprivate func pushNextVC(_ selectType: FoodType) {
+        guard let navigation = self.navigationController as? CustomNavigation else { return }
+        
+        dataManager.currentDetailInfo?.foodType = selectType
+        navigation.pushToViewController(destinationVCCase: .status)
+    }
+}

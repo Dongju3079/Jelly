@@ -9,15 +9,13 @@ import Foundation
 import UIKit
 import SnapKit
 
+protocol TipSelectDelegate: NSObject {
+    func tapTipButton(tag: Int) -> Void
+}
+
 class CommonView: UIView {
     
-    var onTipButtonTapped: ((UIButton) -> Void)? {
-        didSet {
-            if let _ = onTipButtonTapped {
-                tipButton.isHidden = false
-            }
-        }
-    }
+    weak var tipButtonDelegate: TipSelectDelegate?
     
     @IBOutlet weak var progressBar: CustomProgressBar!
     
@@ -31,12 +29,16 @@ class CommonView: UIView {
         applyNib()
     }
     
-    func configuration(enterType: EnterType,
-                       tipButtonTapped: ((UIButton) -> Void)? = nil) {
+    func configuration(enterType: EnterType) {
         
-        self.onTipButtonTapped = tipButtonTapped
         progressBar.raiseGauge(enterType: enterType)
         titleLabel.text = enterType.title
+        
+    }
+    
+    func setTipButton(tipButtonDelegate: TipSelectDelegate) {
+        self.tipButton.isHidden = false
+        self.tipButtonDelegate = tipButtonDelegate
     }
     
     fileprivate func applyNib(){
@@ -68,9 +70,12 @@ class CommonView: UIView {
         }
     }
     
+    func downGaugeAtPop() {
+        self.progressBar.downGauge()
+    }
     
     @IBAction func tipButtonTapped(_ sender: UIButton) {
-        onTipButtonTapped?(sender)
+        tipButtonDelegate?.tapTipButton(tag: sender.tag)
     }
     
 }

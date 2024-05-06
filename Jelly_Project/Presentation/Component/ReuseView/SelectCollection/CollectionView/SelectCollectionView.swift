@@ -8,17 +8,21 @@
 import Foundation
 import UIKit
 import SnapKit
-//import Floaty
+import Floaty
+
+protocol FloatySelectDelegate: NSObject {
+    func tapDeleteButton() -> Void
+    func tapAddButton() -> Void
+    func checkDeleteMode() -> Void
+}
 
 class SelectCollectionView: UIView {
     
-//    private let floaty = Floaty()
+    let floaty = Floaty()
+    weak var floatySelectDelegate : FloatySelectDelegate?
     
-    private var tapAddButton : (() -> Void)?
-    private var tapDeleteButton : (() -> Void)?
-    private var checkEditMode : (() -> Void)?
-    private var tapTipButton : ((UIButton) -> Void)?
     
+    @IBOutlet weak var maskingView: UIView!
     @IBOutlet weak var commonView: CommonView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -36,29 +40,21 @@ class SelectCollectionView: UIView {
         print(#fileID, #function, #line, "- ")
     }
     
-    convenience init(enterType: EnterType,
-                     tapAddButton : (() -> Void)? = nil,
-                     tapDeleteButton : (() -> Void)? = nil,
-                     checkEditMode : (() -> Void)? = nil,
-                     tapTipButton : ((UIButton) -> Void)? = nil) {
-        
-        print(#fileID, #function, #line, "- ")
-        self.init(frame: .zero)
-        self.tapAddButton = tapAddButton
-        self.tapDeleteButton = tapDeleteButton
-        self.checkEditMode = checkEditMode
-        self.tapTipButton = tapTipButton
-        setCollectionView()
-        setCommonView(enterType)
+    deinit {
+        print("테스트 deinit : \(self)")
     }
     
-    fileprivate func setCommonView(_ enterType: EnterType) {
-        self.commonView.configuration(enterType: enterType, tipButtonTapped: tapTipButton)
+    convenience init(enterType: EnterType) {
+        
+        self.init(frame: .zero)
+        setCollectionView()
+        self.commonView.configuration(enterType: enterType)
     }
     
     fileprivate func setLayer() {
         containerView.layer.masksToBounds = true
         collectionView.layer.masksToBounds = false
+        maskingView.addMasking()
     }
     
     fileprivate func setCollectionView() {
@@ -66,32 +62,6 @@ class SelectCollectionView: UIView {
 
         collectionView.register(UINib.getSelectCell(), forCellWithReuseIdentifier: SelectCollectionCell.name)
     }
-    
-//    func setFloaty() {
-//        floaty.hasShadow = false
-//        floaty.fabDelegate = self
-//        floaty.size = 70
-//        floaty.paddingY = 40
-//        floaty.paddingX = 20
-//        floaty.buttonColor = UIColorSet.button(.green)
-//        
-//        floaty.buttonImage = UIImage(named: "plus")!.withRenderingMode(.alwaysTemplate)
-//        floaty.plusColor = .white
-//
-//        floaty.addItem("편집", icon: UIImage(named: "minus")) { _ in
-//            self.tapDeleteButton?()
-//        }
-//        
-//        floaty.addItem("추가", icon: UIImage(named: "plus")) { item in
-//            self.tapAddButton?()
-//        }
-//        
-//        floaty.items.forEach {
-//            $0.titleLabel.font = UIFont(customStyle: .bold, size: 15)
-//        }
-//        
-//        self.addSubview(floaty)
-//    }
     
     fileprivate func applyNib(){
         print(#fileID, #function, #line, "- ")
@@ -111,8 +81,41 @@ class SelectCollectionView: UIView {
         return view
     }
     
+    func setFloatyButton(delegate: FloatySelectDelegate) {
+        self.floatySelectDelegate = delegate
+        floaty.hasShadow = false
+        floaty.fabDelegate = self
+        floaty.size = 70
+        floaty.paddingY = 40
+        floaty.paddingX = 20
+        floaty.buttonColor = UIColorSet.button(.green)
+        
+        floaty.buttonImage = UIImage(named: "plus")!.withRenderingMode(.alwaysTemplate)
+        floaty.plusColor = .white
+
+        floaty.addItem("편집", icon: UIImage(named: "minus")) { [weak self] _ in
+            guard let self = self else { return }
+            floatySelectDelegate?.tapDeleteButton()
+        }
+        
+        floaty.addItem("추가", icon: UIImage(named: "plus")) { [weak self] _ in
+            guard let self = self else { return }
+            floatySelectDelegate?.tapAddButton()
+        }
+        
+        floaty.items.forEach {
+            $0.titleLabel.font = UIFont(customStyle: .bold, size: 15)
+        }
+        
+        self.addSubview(floaty)
+    }
+    
     func downGaugeAtPop() {
         self.commonView.progressBar.downGauge()
+    }
+    
+    func setTipButton(delegate: TipSelectDelegate) {
+        self.commonView.setTipButton(tipButtonDelegate: delegate)
     }
     
     func setTipButtonTag(num: Int) {
@@ -123,10 +126,14 @@ class SelectCollectionView: UIView {
             commonView.tipButton.isHidden = true   
         }
     }
+    
+    func showMaskingView(offSet: Double) {
+        maskingView.isHidden = offSet <= -20
+    }
 }
-//
-//extension SelectCollectionView: FloatyDelegate {
-//    func floatyWillOpen(_ floaty: Floaty) {
-//        self.checkEditMode?()
-//    }
-//}
+
+extension SelectCollectionView: FloatyDelegate {
+    func floatyWillOpen(_ floaty: Floaty) {
+        floatySelectDelegate?.checkDeleteMode()
+    }
+}
