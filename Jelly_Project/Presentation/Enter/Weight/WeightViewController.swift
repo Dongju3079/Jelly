@@ -8,7 +8,7 @@
 import UIKit
 
 class WeightViewController: UIViewController {
-
+    
     // MARK: - Variables
     private var weightArray: [Double] = []
     private var selectedWeight: String = ""
@@ -30,6 +30,8 @@ class WeightViewController: UIViewController {
     deinit {
         print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
     }
+    
+    // MARK: - UI Setup
     
     fileprivate func setupUI() {
         self.title = "몸무게 입력"
@@ -63,31 +65,26 @@ class WeightViewController: UIViewController {
         self.selectView.isUserInteractionEnabled = false
     }
     
-    // MARK: - UI Setup
+    
+    // MARK: - Next VC Action
     
     fileprivate func setupNaviItem() {
-        self.navigationItem.leftBarButtonItem = .getItem(mode: .left, target: self, action: #selector(popViewController))
-        self.navigationItem.rightBarButtonItem = .getItem(mode: .right, target: self, action: #selector(completeAction))
-
+        self.navigationItem.leftBarButtonItem = .getImageItem(target: self,
+                                                              action: #selector(popViewController))
     }
-}
-
-// MARK: - 화면이동
-
-extension WeightViewController {
     
     @objc fileprivate func popViewController() {
         self.commonView.downGaugeAtPop()
         self.navigationController?.popViewController(animated: true)
     }
     
-    #warning("확인버튼으로 변경")
-    @objc fileprivate func completeAction() {
+    @IBAction func pushButtonTapped(_ sender: UIButton) {
         guard let navigation = self.navigationController as? CustomNavigation else { return }
         navigation.pushToViewController(destinationVCCase: .calorie)
     }
 }
 
+// MARK: - Picker
 extension WeightViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -118,6 +115,7 @@ extension WeightViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 
 }
 
+// MARK: - Tip Action
 extension WeightViewController: TipSelectDelegate {
     func tapTipButton(tag: Int) {
         CustomPopup.shared.showCustomPopup(type: .weight)

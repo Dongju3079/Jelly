@@ -11,12 +11,12 @@
         <!--Weight View Controller-->
         <scene sceneID="iSd-53-weJ">
             <objects>
-                <viewController storyboardIdentifier="WeightViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qjW-5v-KBk" customClass="WeightViewController" customModule="Jelly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WeightViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qjW-5v-KBk" customClass="WeightViewController" customModule="Jelly_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zQr-Uv-Pn5">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZyU-T1-5Kz" customClass="CommonView" customModule="Jelly" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZyU-T1-5Kz" customClass="CommonView" customModule="Jelly_Project" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="59" width="393" height="70"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -34,15 +34,35 @@
                                     <constraint firstAttribute="height" constant="80" id="XgQ-hq-y5h"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7x-O5-Evd">
+                                <rect key="frame" x="0.0" y="782" width="393" height="70"/>
+                                <color key="backgroundColor" red="0.37254901959999998" green="0.65098039220000004" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="FcJ-Hf-LRn"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="다음">
+                                    <fontDescription key="titleFontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="25"/>
+                                    <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="pushButtonTapped:" destination="qjW-5v-KBk" eventType="touchUpInside" id="MdT-cr-hZO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="V4L-Y0-znf"/>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.95294117649999999" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="4vX-YE-dpf" firstAttribute="width" secondItem="Rwu-Fi-LE3" secondAttribute="width" multiplier="0.95:1" id="4u8-qB-GRO"/>
                             <constraint firstItem="Rwu-Fi-LE3" firstAttribute="leading" secondItem="V4L-Y0-znf" secondAttribute="leading" constant="20" id="Buw-NE-dl8"/>
+                            <constraint firstItem="V4L-Y0-znf" firstAttribute="trailing" secondItem="I7x-O5-Evd" secondAttribute="trailing" id="EsO-kb-Kzv"/>
+                            <constraint firstItem="I7x-O5-Evd" firstAttribute="centerX" secondItem="V4L-Y0-znf" secondAttribute="centerX" id="FyR-zm-boh"/>
                             <constraint firstItem="Rwu-Fi-LE3" firstAttribute="top" secondItem="ZyU-T1-5Kz" secondAttribute="bottom" id="Gd5-gr-ZHh"/>
                             <constraint firstItem="4vX-YE-dpf" firstAttribute="centerY" secondItem="Rwu-Fi-LE3" secondAttribute="centerY" id="Iu4-7d-wqu"/>
+                            <constraint firstAttribute="bottom" secondItem="I7x-O5-Evd" secondAttribute="bottom" id="L2y-wa-ulU"/>
                             <constraint firstItem="V4L-Y0-znf" firstAttribute="bottom" secondItem="Rwu-Fi-LE3" secondAttribute="bottom" id="N56-Dv-kmn"/>
+                            <constraint firstItem="I7x-O5-Evd" firstAttribute="leading" secondItem="V4L-Y0-znf" secondAttribute="leading" id="W2n-iC-mjP"/>
                             <constraint firstItem="V4L-Y0-znf" firstAttribute="trailing" secondItem="ZyU-T1-5Kz" secondAttribute="trailing" id="ibL-ba-2SH"/>
                             <constraint firstItem="V4L-Y0-znf" firstAttribute="trailing" secondItem="Rwu-Fi-LE3" secondAttribute="trailing" constant="20" id="oTE-7S-I1u"/>
                             <constraint firstItem="4vX-YE-dpf" firstAttribute="centerX" secondItem="Rwu-Fi-LE3" secondAttribute="centerX" id="oWV-hF-Mep"/>

@@ -74,13 +74,8 @@ class ResultViewController: UIViewController {
     #warning("네비 확장으로 처리하기")
     fileprivate func setupNaviItem() {
         self.title = "결과"
-//        self.navigationItem.hidesBackButton = true
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(completeAction))
-        
-        // navigationItem 글꼴 및 색 설정
-        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColorSet.text(.black),
-                                                                        NSAttributedString.Key.font: UIFont(customStyle: .bold, size: 20)!],
-                                                                       for: .normal)
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.getTitleItem(target: self, action: #selector(completeAction))
     }
     
     fileprivate func setupLayer() {

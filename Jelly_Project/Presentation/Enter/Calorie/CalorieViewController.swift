@@ -66,38 +66,37 @@ class CalorieViewController: UIViewController, KeyboardEvent {
         self.commonView.configuration(enterType: enterType)
     }
     
-    /// 타입에 따라서 뷰 생성
-    /// - Parameter elements: 반려동물 식사 타입
-    fileprivate func createTypeView() {
-        guard let detailInfo = dataManager?.currentDetailInfo,
-              let foodType = detailInfo.foodType else { return }
-        
-        commonView.setCalorieViewInfoLabel(foodType)
-        
-        switch foodType {
-        case .wet:
-            makeWetTypeView()
-            
-        case .dry:
-    
-            makeDryTypeView()
-            
-        case .mix:
-            
-            makeMixTypeView()
-        }
-    }
-    
-    fileprivate func setupNaviItem() {
-        self.navigationItem.leftBarButtonItem = .getItem(mode: .left, target: self, action: #selector(popViewController))
-        self.navigationItem.rightBarButtonItem = .getItem(mode: .right, target: self, action: #selector(completeAction))
-    }
-    
     fileprivate func addViewAtInputStackView(inputView: UIView,
                                              responderView: CustomTextFieldView) {
         
         self.inputStackView.addArrangedSubview(inputView)
         self.responderTextField = responderView
+    }
+    
+    // MARK: - Next VC Action
+
+    fileprivate func setupNaviItem() {
+        self.navigationItem.leftBarButtonItem = .getImageItem(target: self,
+                                                         action: #selector(popViewController))
+    }
+    
+    @objc fileprivate func popViewController() {
+        self.commonView.downGaugeAtPop()
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func pushButtonTapped(_ sender: UIButton) {
+        if checkInputValue() {
+            resetGlobalFigure()
+            guard let navigation = self.navigationController as? CustomNavigation else { return }
+            dataManager?.saveDataToDB()
+            
+            
+            
+            navigation.pushToViewController(destinationVCCase: .result)
+            
+            
+        }
     }
     
     // MARK: - 빈 공간 터치시 키보드 내리기
@@ -109,20 +108,12 @@ class CalorieViewController: UIViewController, KeyboardEvent {
     @objc fileprivate func endEditAction() {
         self.view.endEditing(true)
     }
-    
-    // MARK: - 화면이동
-    @objc fileprivate func popViewController() {
-        self.commonView.downGaugeAtPop()
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc fileprivate func completeAction() {
-        if checkInputValue() {
-            resetGlobalFigure()
-            guard let navigation = self.navigationController as? CustomNavigation else { return }
-            dataManager?.saveDataToDB()
-            navigation.pushToViewController(destinationVCCase: .result)
-        }
+}
+
+// MARK: - Helper
+extension CalorieViewController {
+    fileprivate func findEmptyTextField() -> CustomTextFieldView? {
+        return currentTextField.filter({ $0.checkEmptyTextField() }).first
     }
     
     fileprivate func resetGlobalFigure() {
@@ -133,6 +124,24 @@ class CalorieViewController: UIViewController, KeyboardEvent {
 
 // MARK: - 타입에 맞춰서 뷰 생성하기
 extension CalorieViewController {
+    
+    /// 타입에 따라서 뷰 생성
+    /// - Parameter elements: 반려동물 식사 타입
+    fileprivate func createTypeView() {
+        guard let detailInfo = dataManager?.currentDetailInfo,
+              let foodType = detailInfo.foodType else { return }
+        
+        commonView.setCalorieViewInfoLabel(foodType)
+        
+        switch foodType {
+        case .wet:
+            makeWetTypeView()
+        case .dry:
+            makeDryTypeView()
+        case .mix:
+            makeMixTypeView()
+        }
+    }
     
     fileprivate func makeWetTypeView() {
         _ = CustomTextFieldView(viewType: .wet).then {
@@ -265,28 +274,20 @@ extension CalorieViewController {
         AlertManager.shared.defaultAlert(target: self,
                                          title: nil,
                                          message: "입력된 값이 없습니다.",
-                                         style: .alert)
+                                         style: .alert) { _ in
+            textField.becomeFirstResponder()
+        }
     }
 }
 
-// MARK: - Helper
-extension CalorieViewController {
-    fileprivate func findEmptyTextField() -> CustomTextFieldView? {
-        return currentTextField.filter({ $0.checkEmptyTextField() }).first
-    }
-}
+
 
 // MARK: - KeyBoard Tool Button Action
 extension CalorieViewController {
     func checkEmptyTextField(_ textField: UITextField, _ hasText: Bool) {
         if hasText {
-            guard let emptyTextField = findEmptyTextField() else {
-                    textField.resignFirstResponder()
-                return
-            }
-            
+            guard let emptyTextField = findEmptyTextField() else { return }
             emptyTextField.becomeTextFieldResponder()
-            
         } else {
             emptyTextFieldAlert(textField)
         }

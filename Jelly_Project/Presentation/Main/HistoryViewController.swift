@@ -78,9 +78,7 @@ class HistoryViewController: UIViewController {
         }
     }
     
-    @IBAction func enterButtonTapped(_ sender: UIButton) {
-        BasicUserDefaults.shard.resetEnter()
-        
+    @IBAction func enterButtonTapped(_ sender: UIButton) {        
         if let navigation = self.navigationController as? CustomNavigation {
             navigation.pushToViewController(destinationVCCase: .name)
         }
@@ -193,7 +191,7 @@ extension HistoryViewController: SwipeTableViewCellDelegate {
             complete.backgroundColor = UIColorSet.background(.transparent, 0.0)
             complete.textColor = UIColorSet.text(.black)
 
-            complete.image = ImageSet.getImage(name: .trash, size: .large)
+            complete.image = SymbolSet.getSymbolImage(name: .trash, size: .large)
                     
             return [complete]
         } else {

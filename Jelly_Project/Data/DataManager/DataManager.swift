@@ -74,7 +74,7 @@ extension DataManager {
         return self.objects.isEmpty
     }
     
-    func checkDetailDataEmpty() throws {
+    func checkDetailDataEmpty() throws  {
         
         return try objects.forEach {
             if !$0.data.isEmpty {

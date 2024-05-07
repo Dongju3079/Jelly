@@ -27,8 +27,9 @@ extension UITextField {
 
         self.inputAccessoryView = doneToolbar
     }
-    
+
     @objc fileprivate func doneButtonAction() {
+        self.resignFirstResponder()
         checkEmptyTextField(self.hasText)
     }
     

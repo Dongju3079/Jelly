@@ -32,31 +32,13 @@ class CustomTextFieldView: UIView {
     private let infoLabel = CustomInfoView()
     
     private lazy var inputTextfield = CustomTextField(viewMode: true,
-                                                                       priority: 751).then {
+                                                      priority: 751).then {
         $0.addTarget(self, action: #selector(inputText(_:)), for: .editingChanged)
     }
     
     let unitButton = CustomButton(type: .empty).then {
         $0.setContentCompressionResistancePriority(.init(750), for: .horizontal)
         $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-    }
-    
-    fileprivate func setupMenu() -> UIMenu {
-        
-        let menu = UIMenu(title: "단위를 선택하세요.",children: [
-            UIAction(title: "Kg(단위)", handler: { _ in //[weak self] _ in
-//                guard let self = self else { return }
-//                target.setTitle("Kg(단위) ", for: .normal)
-                
-//                self.dataManager?.currentDetailInfo?.dryFeedUnit = 1_000.0
-            }),
-            UIAction(title: "g(단위)", handler: { _ in
-//                target.setTitle("g(단위) ", for: .normal)
-//                self.dataManager?.currentDetailInfo?.dryFeedUnit = 1.0
-            })
-        ])
-        
-        return menu
     }
     
     private let nameLabel = UILabel().then {
@@ -66,14 +48,14 @@ class CustomTextFieldView: UIView {
         $0.textAlignment = .left
     }
 
-    private lazy var textfieldStackView = UIStackView(arrangedSubviews: [nameLabel, inputTextfield, unitButton]).then {
+    private lazy var textFieldStackView = UIStackView(arrangedSubviews: [nameLabel, inputTextfield, unitButton]).then {
         $0.alignment = .fill
         $0.axis = .horizontal
         $0.distribution = .fill
         $0.layer.cornerRadius = 20
     }
     
-    private lazy var allView = UIStackView(arrangedSubviews: [infoLabel, textfieldStackView]).then {
+    private lazy var allView = UIStackView(arrangedSubviews: [infoLabel, textFieldStackView]).then {
         $0.alignment = .fill
         $0.spacing = 10
         $0.distribution = .fill
@@ -141,7 +123,7 @@ extension CustomTextFieldView {
             make.edges.equalToSuperview()
         }
         
-        textfieldStackView.snp.makeConstraints { make in
+        textFieldStackView.snp.makeConstraints { make in
             make.width.equalTo(allView.snp.width)
             make.height.equalTo(70)
         }
@@ -157,11 +139,11 @@ extension CustomTextFieldView {
         case .input:
             infoLabel.setupColor(UIColorSet.text(.black))
             inputTextfield.font = UIFont(customStyle: .bold, size: 30)
-            textfieldStackView.backgroundColor = .white
+            textFieldStackView.backgroundColor = .white
         case .output:
             infoLabel.setupColor(UIColorSet.text(.green3))
             inputTextfield.font = UIFont(customStyle: .bold, size: 20)
-            textfieldStackView.backgroundColor = UIColorSet.background(.green)
+            textFieldStackView.backgroundColor = UIColorSet.background(.green)
         }
     }
     
@@ -311,8 +293,8 @@ extension CustomTextFieldView {
     }
     
     fileprivate func changeStackViewMargins() {
-        textfieldStackView.isLayoutMarginsRelativeArrangement = true
-        textfieldStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+        textFieldStackView.isLayoutMarginsRelativeArrangement = true
+        textFieldStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
     }
 }
 

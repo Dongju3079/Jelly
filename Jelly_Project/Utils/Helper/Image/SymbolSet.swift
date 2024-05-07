@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-struct ImageSet {
+struct SymbolSet {
     
     enum Name: String {
         case trash = "trash.fill"
@@ -30,7 +30,7 @@ struct ImageSet {
         }
     }
 
-    static func getImage(name: Name, size: Size) -> UIImage? {
+    static func getSymbolImage(name: Name, size: Size) -> UIImage? {
         return UIImage(systemName: name.rawValue, withConfiguration: size.configuration)
     }
     

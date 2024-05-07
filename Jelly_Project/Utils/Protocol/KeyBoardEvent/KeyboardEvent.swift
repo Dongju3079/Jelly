@@ -48,7 +48,7 @@ extension KeyboardEvent where Self: UIViewController {
                                                   from: currentTextField.superview)
 
         // result : 타겟뷰의 최하단 Y 위치 (+ 수치 : 임계값)
-        let textFieldBottomY = convertedTextFieldFrame.maxY + 15
+        let textFieldBottomY = convertedTextFieldFrame.maxY + 30
         
         // result : 키보드 최상단 Y 위치
         let keyboardTopY = keyboardFrame.cgRectValue.origin.y

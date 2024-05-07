@@ -49,30 +49,8 @@ class NameViewController: UIViewController {
     }
     
     fileprivate func setupNaviItem() {
-        self.navigationItem.leftBarButtonItem = .getItem(target: self, action: #selector(popViewController))
-    }
-}
-
-// MARK: - Floating Button
-
-extension NameViewController {
-    
-    fileprivate func showAddAlert() {
-        AlertManager.shared.addNameAlert(target: self, completion: self.addObject(_:))
-    }
-    
-    fileprivate func onEditMode() {
-        deleteMode = true
-        
-        self.snapShot.reloadSections([0])
-        self.dataSource?.apply(snapShot, animatingDifferences: true)
-    }
-
-    fileprivate func changeEditMode() {
-        deleteMode.toggle()
-        
-        self.snapShot.reloadSections([0])
-        self.dataSource?.apply(snapShot, animatingDifferences: true)
+        self.navigationItem.leftBarButtonItem = .getImageItem(target: self,
+                                                         action: #selector(popViewController))
     }
 }
 
@@ -171,22 +149,29 @@ extension NameViewController {
 extension NameViewController: FloatySelectDelegate {
     func tapDeleteButton() {
         deleteMode = true
-        
-        let FloatySelectable = 10
-        
         self.snapShot.reloadSections([0])
         self.dataSource?.apply(snapShot, animatingDifferences: true)
     }
     
     func tapAddButton() {
         print("👾 테스트 : 탭 메서드 실행 👾")
-        AlertManager.shared.addNameAlert(target: self, completion: self.addObject(_:))
+        AlertManager.shared.addNameAlert(target: self) { [weak self] userInput in
+            guard let self = self else { return }
+            self.addObject(userInput)
+        }
     }
     
     func checkDeleteMode() {
         if deleteMode {
             changeEditMode()
         }
+    }
+    
+    fileprivate func changeEditMode() {
+        deleteMode.toggle()
+        
+        self.snapShot.reloadSections([0])
+        self.dataSource?.apply(snapShot, animatingDifferences: true)
     }
 }
 extension NameViewController: DeleteDelegate {

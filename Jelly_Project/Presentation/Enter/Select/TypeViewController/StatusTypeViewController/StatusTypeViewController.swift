@@ -43,7 +43,8 @@ class StatusTypeViewController: UIViewController {
     }
     
     fileprivate func setupNaviItem() {
-        self.navigationItem.leftBarButtonItem = .getItem(mode: .left, target: self, action: #selector(popViewController))
+        self.navigationItem.leftBarButtonItem = .getImageItem(target: self,
+                                                         action: #selector(popViewController))
     }
     
     fileprivate func setupCollectionView() {

@@ -18,15 +18,20 @@ protocol FloatySelectDelegate: NSObject {
 
 class SelectCollectionView: UIView {
     
-    let floaty = Floaty()
-    weak var floatySelectDelegate : FloatySelectDelegate?
+    // MARK: - Variables
     
+    private weak var floatySelectDelegate : FloatySelectDelegate?
+    private let floatyInit = FloatyInit()
+    
+    // MARK: - UI components
     
     @IBOutlet weak var maskingView: UIView!
     @IBOutlet weak var commonView: CommonView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var emptyLabel: UILabel!
+    
+    // MARK: - LifeCycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,10 +45,6 @@ class SelectCollectionView: UIView {
         print(#fileID, #function, #line, "- ")
     }
     
-    deinit {
-        print("테스트 deinit : \(self)")
-    }
-    
     convenience init(enterType: EnterType) {
         
         self.init(frame: .zero)
@@ -51,17 +52,8 @@ class SelectCollectionView: UIView {
         self.commonView.configuration(enterType: enterType)
     }
     
-    fileprivate func setLayer() {
-        containerView.layer.masksToBounds = true
-        collectionView.layer.masksToBounds = false
-        maskingView.addMasking()
-    }
     
-    fileprivate func setCollectionView() {
-        collectionView.showsVerticalScrollIndicator = false
-
-        collectionView.register(UINib.getSelectCell(), forCellWithReuseIdentifier: SelectCollectionCell.name)
-    }
+    // MARK: - UI Setup
     
     fileprivate func applyNib(){
         print(#fileID, #function, #line, "- ")
@@ -73,47 +65,34 @@ class SelectCollectionView: UIView {
             make.edges.equalToSuperview()
         }
     }
-    
-    fileprivate func findNibView() -> UIView? {
-        let nibName = String(describing: Self.self)
-        let nib = Bundle.main.loadNibNamed(nibName, owner: self)
-        guard let view = nib?.first as? UIView else { return nil }
-        return view
+
+    fileprivate func setLayer() {
+        containerView.layer.masksToBounds = true
+        collectionView.layer.masksToBounds = false
+        maskingView.addMasking()
     }
     
+    fileprivate func setCollectionView() {
+        collectionView.showsVerticalScrollIndicator = false
+
+        collectionView.register(UINib.getSelectCell(), forCellWithReuseIdentifier: SelectCollectionCell.name)
+    }
+
+    // MARK: - Floty
+
     func setFloatyButton(delegate: FloatySelectDelegate) {
         self.floatySelectDelegate = delegate
-        floaty.hasShadow = false
+        let floaty = floatyInit.getFloatyButton(delegate: delegate)
         floaty.fabDelegate = self
-        floaty.size = 70
-        floaty.paddingY = 40
-        floaty.paddingX = 20
-        floaty.buttonColor = UIColorSet.button(.green)
-        
-        floaty.buttonImage = UIImage(named: "plus")!.withRenderingMode(.alwaysTemplate)
-        floaty.plusColor = .white
-
-        floaty.addItem("편집", icon: UIImage(named: "minus")) { [weak self] _ in
-            guard let self = self else { return }
-            floatySelectDelegate?.tapDeleteButton()
-        }
-        
-        floaty.addItem("추가", icon: UIImage(named: "plus")) { [weak self] _ in
-            guard let self = self else { return }
-            floatySelectDelegate?.tapAddButton()
-        }
-        
-        floaty.items.forEach {
-            $0.titleLabel.font = UIFont(customStyle: .bold, size: 15)
-        }
-        
         self.addSubview(floaty)
     }
     
+    // MARK: - Progress Gauge
     func downGaugeAtPop() {
         self.commonView.progressBar.downGauge()
     }
     
+    // MARK: - TipButton
     func setTipButton(delegate: TipSelectDelegate) {
         self.commonView.setTipButton(tipButtonDelegate: delegate)
     }
@@ -127,11 +106,24 @@ class SelectCollectionView: UIView {
         }
     }
     
+    // MARK: - Masking
     func showMaskingView(offSet: Double) {
-        maskingView.isHidden = offSet <= -20
+        maskingView.isHidden = offSet <= 20
     }
 }
 
+// MARK: - Helper
+extension SelectCollectionView {
+    
+    fileprivate func findNibView() -> UIView? {
+        let nibName = String(describing: Self.self)
+        let nib = Bundle.main.loadNibNamed(nibName, owner: self)
+        guard let view = nib?.first as? UIView else { return nil }
+        return view
+    }
+}
+
+// MARK: - Floaty
 extension SelectCollectionView: FloatyDelegate {
     func floatyWillOpen(_ floaty: Floaty) {
         floatySelectDelegate?.checkDeleteMode()
