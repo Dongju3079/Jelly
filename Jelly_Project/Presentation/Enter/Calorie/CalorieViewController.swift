@@ -90,12 +90,7 @@ class CalorieViewController: UIViewController, KeyboardEvent {
             resetGlobalFigure()
             guard let navigation = self.navigationController as? CustomNavigation else { return }
             dataManager?.saveDataToDB()
-            
-            
-            
             navigation.pushToViewController(destinationVCCase: .result)
-            
-            
         }
     }
     
@@ -214,7 +209,6 @@ extension CalorieViewController {
 
 // MARK: - 입력 값 필터링
 
-#warning("재사용 가능한 부분")
 extension CalorieViewController {
     
     fileprivate func checkInputValue() -> Bool {
@@ -305,7 +299,5 @@ extension CalorieViewController: InputDelegate {
              break
          }
     }
-    
-    
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		522322872BED841100D0A96F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 522322852BED841100D0A96F /* InfoPlist.strings */; };
 		52B21A212BE8081F0017C2E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A202BE8081F0017C2E9 /* AppDelegate.swift */; };
 		52B21A232BE8081F0017C2E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A222BE8081F0017C2E9 /* SceneDelegate.swift */; };
 		52B21A2A2BE8081F0017C2E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B21A292BE8081F0017C2E9 /* Assets.xcassets */; };
@@ -79,9 +80,9 @@
 		52B21AF22BE809180017C2E9 /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 52B21AF12BE809180017C2E9 /* SwiftEntryKit */; };
 		52B21AF52BE809210017C2E9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52B21AF42BE809210017C2E9 /* RealmSwift */; };
 		52B21AF62BE8094D0017C2E9 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 52B21AF42BE809210017C2E9 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		52DFB9A82BEBE9BA0057E72E /* Pods_Jelly_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D230601ACD93232F3B68E614 /* Pods_Jelly_Project.framework */; };
 		52EAECC32BE990F300CDD68F /* FloatyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EAECC22BE990F300CDD68F /* FloatyButton.swift */; };
 		52EAECC62BE9942600CDD68F /* ImageSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EAECC52BE9942600CDD68F /* ImageSet.swift */; };
-		80F28E79AB5913B76E497146 /* Pods_Jelly_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D230601ACD93232F3B68E614 /* Pods_Jelly_Project.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -100,6 +101,13 @@
 
 /* Begin PBXFileReference section */
 		22254294F3178C0EB2BC65F6 /* Pods-Jelly_Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jelly_Project.release.xcconfig"; path = "Target Support Files/Pods-Jelly_Project/Pods-Jelly_Project.release.xcconfig"; sourceTree = "<group>"; };
+		5219372E2BEBD42E00E76332 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
+		521937302BEBD4AC00E76332 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		522322832BED83DD00D0A96F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		522322842BED83DD00D0A96F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		522322882BED843C00D0A96F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		522322892BED84AE00D0A96F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		524DE00F2BEBF4EB009EF2F4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		52B21A1D2BE8081F0017C2E9 /* Jelly_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jelly_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B21A202BE8081F0017C2E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52B21A222BE8081F0017C2E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -182,9 +190,9 @@
 				52B21AF22BE809180017C2E9 /* SwiftEntryKit in Frameworks */,
 				52B21AEF2BE809130017C2E9 /* SnapKit in Frameworks */,
 				52B21AE92BE809080017C2E9 /* SwipeCellKit in Frameworks */,
+				52DFB9A82BEBE9BA0057E72E /* Pods_Jelly_Project.framework in Frameworks */,
 				52B21AF52BE809210017C2E9 /* RealmSwift in Frameworks */,
 				52B21AEC2BE8090C0017C2E9 /* Then in Frameworks */,
-				80F28E79AB5913B76E497146 /* Pods_Jelly_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +235,7 @@
 				52B21A7D2BE808BC0017C2E9 /* Utils */,
 				52B21AC72BE808F40017C2E9 /* Presentation */,
 				52B21A2E2BE8081F0017C2E9 /* Info.plist */,
+				522322852BED841100D0A96F /* InfoPlist.strings */,
 			);
 			path = Jelly_Project;
 			sourceTree = "<group>";
@@ -737,6 +746,9 @@
 		7EEF207105512849C8CFC216 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				524DE00F2BEBF4EB009EF2F4 /* StoreKit.framework */,
+				521937302BEBD4AC00E76332 /* AdSupport.framework */,
+				5219372E2BEBD42E00E76332 /* AppTrackingTransparency.framework */,
 				D230601ACD93232F3B68E614 /* Pods_Jelly_Project.framework */,
 			);
 			name = Frameworks;
@@ -794,6 +806,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 52B21A142BE8081F0017C2E9;
 			packageReferences = (
@@ -818,6 +831,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52B21AD12BE808F40017C2E9 /* CommonView.xib in Resources */,
+				522322872BED841100D0A96F /* InfoPlist.strings in Resources */,
 				52B21AE42BE808F40017C2E9 /* Main.storyboard in Resources */,
 				52B21A372BE8085B0017C2E9 /* SpoqaHanSansNeo-Bold.ttf in Resources */,
 				52B21AE52BE808F40017C2E9 /* ResultViewController.storyboard in Resources */,
@@ -943,10 +957,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		522322852BED841100D0A96F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				522322882BED843C00D0A96F /* ko */,
+				522322892BED84AE00D0A96F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		52B21A2B2BE8081F0017C2E9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				52B21A2C2BE8081F0017C2E9 /* Base */,
+				522322832BED83DD00D0A96F /* ko */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -955,6 +979,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				52B21AC12BE808F40017C2E9 /* Base */,
+				522322842BED83DD00D0A96F /* ko */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -967,6 +992,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1030,6 +1056,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1087,9 +1114,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LNXWGGBBH6;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Jelly_Project/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1102,8 +1131,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Catslave.Jelly-Project";
+				MARKETING_VERSION = 1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Catslave.Jelly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1121,9 +1150,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LNXWGGBBH6;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Jelly_Project/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1136,8 +1167,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Catslave.Jelly-Project";
+				MARKETING_VERSION = 1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Catslave.Jelly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

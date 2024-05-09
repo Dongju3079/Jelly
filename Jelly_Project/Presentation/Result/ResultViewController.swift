@@ -71,7 +71,6 @@ class ResultViewController: UIViewController {
         weightLabel.text = "\(detailInfo.weight) Kg"
     }
 
-    #warning("네비 확장으로 처리하기")
     fileprivate func setupNaviItem() {
         self.title = "결과"
         self.navigationItem.hidesBackButton = true

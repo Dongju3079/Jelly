@@ -75,7 +75,7 @@ extension StatusType {
     
     static func getAllTypesOfPriority(priority: Int) -> [Self] {
                 
-        var statusTypes: [StatusType] = StatusType.allCases
+        let statusTypes: [StatusType] = StatusType.allCases
             .filter { $0.priority == priority }
         
         return statusTypes

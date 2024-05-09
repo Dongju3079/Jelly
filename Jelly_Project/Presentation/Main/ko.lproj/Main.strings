@@ -1,0 +1,18 @@
+
+/* Class = "UILabel"; text = "성장기"; ObjectID = "6Ns-1c-Nvi"; */
+"6Ns-1c-Nvi.text" = "성장기";
+
+/* Class = "UILabel"; text = "우측 하단 추가 버튼을 통해서 \n반려묘의 급여를 계산해보세요."; ObjectID = "Puz-v2-MUo"; */
+"Puz-v2-MUo.text" = "우측 하단 추가 버튼을 통해서 \n반려묘의 급여를 계산해보세요.";
+
+/* Class = "UILabel"; text = "하루 적정 칼로리 : 220"; ObjectID = "dud-gA-UZO"; */
+"dud-gA-UZO.text" = "하루 적정 칼로리 : 220";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "eoe-GP-bad"; */
+"eoe-GP-bad.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "jQl-Fp-2aT"; */
+"jQl-Fp-2aT.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "2024.04.05"; ObjectID = "oJB-Py-9TW"; */
+"oJB-Py-9TW.text" = "2024.04.05";

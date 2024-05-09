@@ -9,11 +9,14 @@ import UIKit
 import SwipeCellKit
 import SwiftEntryKit
 
-
-
 class HistoryViewController: UIViewController {
     
+    // MARK: - adMob
+//    var bannerView: GADBannerView!
+    
+    
     // MARK: - Variables
+    
     private let dataManager = DataManager.shared
     
     private var snapShot = NSDiffableDataSourceSnapshot<ObjectInformation, DetailInformation>()
@@ -32,8 +35,9 @@ class HistoryViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         configurationTableView()
+//        showBanner()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dataManager.readData()
@@ -55,6 +59,53 @@ class HistoryViewController: UIViewController {
         print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
     }
     
+    // MARK: - adMob
+    
+//    private func showBanner() {
+//        setupBanner()
+//        addBannerViewToView(self.bannerView)
+//        loadBanner()
+//    }
+//    
+//    private func setupBanner() {
+//        let viewWidth = view.frame.inset(by: view.safeAreaInsets).width
+//        let adaptiveSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
+//        bannerView = GADBannerView(adSize: adaptiveSize)
+//        bannerView.delegate = self
+//    }
+//    
+//    private func addBannerViewToView(_ bannerView: GADBannerView) {
+//        bannerView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(bannerView)
+//        view.addConstraints(
+//            [NSLayoutConstraint(item: bannerView,
+//                                attribute: .bottom,
+//                                relatedBy: .equal,
+//                                toItem: view,
+//                                attribute: .bottom,
+//                                multiplier: 1,
+//                                constant: 0),
+//             NSLayoutConstraint(item: bannerView,
+//                                attribute: .centerX,
+//                                relatedBy: .equal,
+//                                toItem: view,
+//                                attribute: .centerX,
+//                                multiplier: 1,
+//                                constant: 0)
+//            ])
+//    }
+//    
+//    private func loadBanner() {
+//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2435281174"
+//        bannerView.rootViewController = self
+//        
+//        bannerView.load(GADRequest())
+//    }
+    
+    // MARK: - Store kit
+    
+    
+    
     // MARK: - UI Setup
     
     fileprivate func setupUI() {
@@ -69,7 +120,7 @@ class HistoryViewController: UIViewController {
     }
     
     fileprivate func setupEmptyView() {
-                
+        
         do {
             try dataManager.checkDetailDataEmpty()
             emptyLabel.isHidden = false
@@ -78,7 +129,7 @@ class HistoryViewController: UIViewController {
         }
     }
     
-    @IBAction func enterButtonTapped(_ sender: UIButton) {        
+    @IBAction func enterButtonTapped(_ sender: UIButton) {
         if let navigation = self.navigationController as? CustomNavigation {
             navigation.pushToViewController(destinationVCCase: .name)
         }
@@ -231,6 +282,30 @@ extension HistoryViewController: UIScrollViewDelegate {
         maskingView.isHidden = scrollView.contentOffset.y <= 0
     }
 }
+
+//extension HistoryViewController: GADBannerViewDelegate {
+//    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+//        print("👾 테스트 : bannerViewDidReceiveAd 👾")
+//    }
+//
+//    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+//        print("👾 테스트 : bannerView:didFailToReceiveAdWithError: \(error.localizedDescription) 👾")
+//
+//    }
+//
+//    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
+//        print("👾 테스트 : bannerViewDidRecordImpression 👾")
+//    }
+//
+//    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {        print("👾 테스트 : bannerViewWillPresentScreen 👾")
+//    }
+//
+//    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {        print("👾 테스트 : bannerViewWillDIsmissScreen 👾")
+//    }
+//
+//    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {        print("👾 테스트 : bannerViewDidDismissScreen 👾")
+//    }
+//}
 
 
 
