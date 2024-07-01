@@ -11,6 +11,7 @@ class BasicUserDefaults {
     
     enum Key: String {
         case firstEnter
+        case test
     }
     
     static let shard = BasicUserDefaults()
@@ -18,6 +19,14 @@ class BasicUserDefaults {
     
     func enteredCheck() -> Bool {
         let entered = UserDefaults.standard.bool(forKey: Key.firstEnter.rawValue)
+
+        return entered
+    }
+    
+    func testEnteredCheck() -> Bool {
+        let entered = UserDefaults.standard.bool(forKey: Key.test.rawValue)
+
+        print("테스트 시점 : \(entered)")
 
         return entered
     }

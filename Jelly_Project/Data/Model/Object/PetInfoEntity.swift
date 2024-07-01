@@ -8,18 +8,18 @@
 import Foundation
 import RealmSwift
 
-class ObjectInformationEntity: Object {
+class PetInfoEntity: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var title: String
     @Persisted var date = Date()
-    @Persisted var details: List<DetailInformationEntity>
+    @Persisted var petStatus: List<PetStatusEntity>
     
     var id: String {
         self._id.stringValue
     }
     
-    var detailsSorted: Results<DetailInformationEntity> {
-        self.details.sorted(byKeyPath: "createdDate", ascending: false)
+    var statusSorted: Results<PetStatusEntity> {
+        self.petStatus.sorted(byKeyPath: "createdDate", ascending: false)
     }
     
     convenience init(title: String) {

@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class DetailInformationEntity: Object {
+class PetStatusEntity: Object {
     
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var createdDate: Date = Date()
@@ -23,7 +23,7 @@ class DetailInformationEntity: Object {
         self._id.stringValue
     }
     
-    convenience init(_ result: DetailInformation) {
+    convenience init(_ result: PetStatus) {
         self.init()
         self.foodTypeRawValue = result.foodType?.rawValue
         self.statusTypeRawValue = result.status?.rawValue

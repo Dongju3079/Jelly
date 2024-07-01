@@ -13,7 +13,7 @@ enum FoodType: Int, Selectable, Codable, CaseIterable {
     case dry = 1
     case mix = 2
     
-    var title : String {
+    var name : String {
         switch self {
         case .wet:
             return "습식"

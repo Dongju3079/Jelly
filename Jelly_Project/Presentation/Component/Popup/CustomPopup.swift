@@ -63,8 +63,6 @@ class CustomPopup {
     private var alertDataSource = PopupPresets()
     
     func showCustomPopup(type: MessageType) {
-  
-        BasicUserDefaults.shard.firstEnter()
         guard let attributes = alertDataSource.dataSource else { return }
 
         let contentView = setPopup(title: type.title,

@@ -49,10 +49,6 @@ class CalorieViewController: UIViewController, KeyboardEvent {
         responderTextField.becomeTextFieldResponder()
     }
     
-    deinit {
-        print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
-    }
-    
     // MARK: - UI Setup
     
     fileprivate func setupUI() {
@@ -123,7 +119,7 @@ extension CalorieViewController {
     /// 타입에 따라서 뷰 생성
     /// - Parameter elements: 반려동물 식사 타입
     fileprivate func createTypeView() {
-        guard let detailInfo = dataManager?.currentDetailInfo,
+        guard let detailInfo = dataManager?.currentPetStatus,
               let foodType = detailInfo.foodType else { return }
         
         commonView.setCalorieViewInfoLabel(foodType)
@@ -194,12 +190,12 @@ extension CalorieViewController {
                 guard let self = self else { return }
                 target.setTitle("Kg(단위) ", for: .normal)
                 
-                self.dataManager?.currentDetailInfo?.dryFeedUnit = 1_000.0
+                self.dataManager?.currentPetStatus?.dryFeedUnit = 1_000.0
             }),
             UIAction(title: "g(단위)", handler: { [weak self] _ in
                 guard let self = self else { return }
                 target.setTitle("g(단위) ", for: .normal)
-                self.dataManager?.currentDetailInfo?.dryFeedUnit = 1.0
+                self.dataManager?.currentPetStatus?.dryFeedUnit = 1.0
             })
         ])
         
@@ -292,9 +288,9 @@ extension CalorieViewController: InputDelegate {
     func inputTextFieldEvent(calorie: Double, foodType: FoodType) {
         switch foodType {
          case .wet:
-             dataManager?.currentDetailInfo?.wetFeedCalorie = calorie
+             dataManager?.currentPetStatus?.wetFeedCalorie = calorie
          case .dry:
-             dataManager?.currentDetailInfo?.dryFeedCalorie = calorie
+             dataManager?.currentPetStatus?.dryFeedCalorie = calorie
          case .mix:
              break
          }

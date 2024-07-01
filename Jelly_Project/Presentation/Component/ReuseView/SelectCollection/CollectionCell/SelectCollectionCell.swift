@@ -19,7 +19,7 @@ class SelectCollectionCell: UICollectionViewCell {
     var useCase: Selectable? {
         didSet {
             guard let useCase = useCase else { return }
-            nameLabel.text = useCase.title
+            nameLabel.text = useCase.name
         }
     }
     
@@ -33,7 +33,7 @@ class SelectCollectionCell: UICollectionViewCell {
     }
     
     override func draw(_ rect: CGRect) {
-        if !(useCase is ObjectInformation) {
+        if !(useCase is PetInfo) {
             setupImage()
         } else {
             typeImage.isHidden = true

@@ -6,6 +6,8 @@
 //
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 import Then
 
 class NameViewController: UIViewController {
@@ -18,8 +20,8 @@ class NameViewController: UIViewController {
     
     private var menuMode: Bool = false
     private var deleteMode: Bool = false
-    private var snapShot = NSDiffableDataSourceSnapshot<Int, ObjectInformation>()
-    private var dataSource: UICollectionViewDiffableDataSource<Int, ObjectInformation>? = nil
+    private var snapShot = NSDiffableDataSourceSnapshot<Int, PetInfo>()
+    private var dataSource: UICollectionViewDiffableDataSource<Int, PetInfo>? = nil
     
     private lazy var selectView = SelectCollectionView(enterType: .name).then {
         $0.setFloatyButton(delegate: self)
@@ -31,11 +33,6 @@ class NameViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         checkEmptyView()
-        print("👾 테스트 네임 : \(self)뷰가 생성되고 있습니다. 👾")
-    }
-    
-    deinit {
-        print("👾 테스트 네임 : \(self)뷰가 해제되고 있습니다. 👾")
     }
     
     // MARK: - UI Setup
@@ -74,11 +71,11 @@ extension NameViewController {
             return cell
         })
         
-        setupData(dataManager.objects, animation: false)
+        setupData(dataManager.petInfos, animation: false)
     }
     
-    fileprivate func setupData(_ upData: [ObjectInformation], animation: Bool = true) {
-        self.snapShot = NSDiffableDataSourceSnapshot<Int, ObjectInformation>()
+    fileprivate func setupData(_ upData: [PetInfo], animation: Bool = true) {
+        self.snapShot = NSDiffableDataSourceSnapshot<Int, PetInfo>()
         self.snapShot.appendSections([0])
         self.snapShot.appendItems(upData, toSection: 0)
         self.dataSource?.apply(snapShot, animatingDifferences: animation)
@@ -101,7 +98,7 @@ extension NameViewController: UICollectionViewDelegateFlowLayout {
 extension NameViewController {
     
     fileprivate func checkEmptyView() {
-        selectView.emptyLabel.isHidden = !dataManager.checkObjectDataEmpty()
+        selectView.emptyLabel.isHidden = !dataManager.checkPetInfoDataEmpty()
     }
     
 }
@@ -129,14 +126,14 @@ extension NameViewController: UICollectionViewDelegate {
 
 extension NameViewController {
     
-    fileprivate func addObject(_ sectionTitle: String) {
-        let newItem = dataManager.makeNewObjectToDB(sectionTitle)
+    fileprivate func addPetInfo(_ sectionTitle: String) {
+        let newItem = dataManager.makePetInfo(sectionTitle)
         checkEmptyView()
         getToAdd(newItem)
         self.dataSource?.apply(self.snapShot, animatingDifferences: true)
     }
     
-    fileprivate func getToAdd(_ newItem: ObjectInformation) {
+    fileprivate func getToAdd(_ newItem: PetInfo) {
         if let firstItem = snapShot.itemIdentifiers(inSection: 0).first {
             snapShot.insertItems([newItem], beforeItem: firstItem)
         } else {
@@ -157,7 +154,7 @@ extension NameViewController: FloatySelectDelegate {
         print("👾 테스트 : 탭 메서드 실행 👾")
         AlertManager.shared.addNameAlert(target: self) { [weak self] userInput in
             guard let self = self else { return }
-            self.addObject(userInput)
+            self.addPetInfo(userInput)
         }
     }
     
@@ -178,7 +175,7 @@ extension NameViewController: DeleteDelegate {
     
     func deleteButtonClosure(_ deleteItem: Selectable) {
 
-        guard let deleteItem = deleteItem as? ObjectInformation else { return }
+        guard let deleteItem = deleteItem as? PetInfo else { return }
         dataManager.deleteObjectToDB(deleteItem)
         snapShot.deleteItems([deleteItem])
         checkEmptyView()

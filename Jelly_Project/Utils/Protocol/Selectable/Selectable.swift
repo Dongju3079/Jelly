@@ -8,5 +8,5 @@
 import Foundation
 
 protocol Selectable {
-    var title: String { get }
+    var name: String { get }
 }

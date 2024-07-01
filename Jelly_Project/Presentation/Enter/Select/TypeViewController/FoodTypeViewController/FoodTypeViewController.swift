@@ -24,10 +24,6 @@ class FoodTypeViewController: UIViewController {
         setupUI()
     }
     
-    deinit {
-        print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
-    }
-    
     // MARK: - UI Setup
     
     fileprivate func setupUI() {
@@ -92,7 +88,7 @@ extension FoodTypeViewController {
     fileprivate func pushNextVC(_ selectType: FoodType) {
         guard let navigation = self.navigationController as? CustomNavigation else { return }
         
-        dataManager.currentDetailInfo?.foodType = selectType
+        dataManager.currentPetStatus?.foodType = selectType
         navigation.pushToViewController(destinationVCCase: .status)
     }
 }

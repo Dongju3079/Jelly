@@ -27,10 +27,6 @@ class WeightViewController: UIViewController {
         setupUI()
     }
     
-    deinit {
-        print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
-    }
-    
     // MARK: - UI Setup
     
     fileprivate func setupUI() {
@@ -110,7 +106,7 @@ extension WeightViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.dataManager.currentDetailInfo?.weight = weightArray[row]
+        self.dataManager.currentPetStatus?.weight = weightArray[row]
     }
 
 }

@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		522322872BED841100D0A96F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 522322852BED841100D0A96F /* InfoPlist.strings */; };
+		523F76DF2C31BFFB00180725 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 523F76DE2C31BFFB00180725 /* RxCocoa */; };
+		523F76E12C31BFFB00180725 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 523F76E02C31BFFB00180725 /* RxRelay */; };
+		523F76E32C31BFFB00180725 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 523F76E22C31BFFB00180725 /* RxSwift */; };
+		523F76E72C31C3E800180725 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 523F76E62C31C3E800180725 /* Differentiator */; };
+		523F76E92C31C3E900180725 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 523F76E82C31C3E900180725 /* RxDataSources */; };
+		523F76F82C322B2400180725 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 523F76F72C322B2400180725 /* ReactorKit */; };
+		523F76FA2C322BC400180725 /* PetInfoReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F76F92C322BC400180725 /* PetInfoReactor.swift */; };
+		526BCD132BEE01CA005248D5 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 526BCD122BEE01CA005248D5 /* GoogleMobileAds */; };
 		52B21A212BE8081F0017C2E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A202BE8081F0017C2E9 /* AppDelegate.swift */; };
 		52B21A232BE8081F0017C2E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A222BE8081F0017C2E9 /* SceneDelegate.swift */; };
 		52B21A2A2BE8081F0017C2E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B21A292BE8081F0017C2E9 /* Assets.xcassets */; };
@@ -17,10 +25,10 @@
 		52B21A3A2BE808690017C2E9 /* BasicUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A392BE808690017C2E9 /* BasicUserDefaults.swift */; };
 		52B21A4C2BE808B50017C2E9 /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A3D2BE808B50017C2E9 /* DataRepository.swift */; };
 		52B21A4D2BE808B50017C2E9 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A3F2BE808B50017C2E9 /* DataManager.swift */; };
-		52B21A4E2BE808B50017C2E9 /* DetailInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A412BE808B50017C2E9 /* DetailInformation.swift */; };
-		52B21A4F2BE808B50017C2E9 /* DetailInformationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A422BE808B50017C2E9 /* DetailInformationEntity.swift */; };
-		52B21A502BE808B50017C2E9 /* ObjectInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A442BE808B50017C2E9 /* ObjectInformation.swift */; };
-		52B21A512BE808B50017C2E9 /* ObjectInformationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A452BE808B50017C2E9 /* ObjectInformationEntity.swift */; };
+		52B21A4E2BE808B50017C2E9 /* PetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A412BE808B50017C2E9 /* PetStatus.swift */; };
+		52B21A4F2BE808B50017C2E9 /* PetStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A422BE808B50017C2E9 /* PetStatusEntity.swift */; };
+		52B21A502BE808B50017C2E9 /* PetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A442BE808B50017C2E9 /* PetInfo.swift */; };
+		52B21A512BE808B50017C2E9 /* PetInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A452BE808B50017C2E9 /* PetInfoEntity.swift */; };
 		52B21A522BE808B50017C2E9 /* FoodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A472BE808B50017C2E9 /* FoodType.swift */; };
 		52B21A532BE808B50017C2E9 /* StatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A482BE808B50017C2E9 /* StatusType.swift */; };
 		52B21A7E2BE808BC0017C2E9 /* UIBarButtonItem+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21A542BE808BC0017C2E9 /* UIBarButtonItem+Ext.swift */; };
@@ -107,6 +115,7 @@
 		522322842BED83DD00D0A96F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		522322882BED843C00D0A96F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		522322892BED84AE00D0A96F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		523F76F92C322BC400180725 /* PetInfoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfoReactor.swift; sourceTree = "<group>"; };
 		524DE00F2BEBF4EB009EF2F4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		52B21A1D2BE8081F0017C2E9 /* Jelly_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jelly_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B21A202BE8081F0017C2E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,10 +128,10 @@
 		52B21A392BE808690017C2E9 /* BasicUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicUserDefaults.swift; sourceTree = "<group>"; };
 		52B21A3D2BE808B50017C2E9 /* DataRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataRepository.swift; sourceTree = "<group>"; };
 		52B21A3F2BE808B50017C2E9 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		52B21A412BE808B50017C2E9 /* DetailInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailInformation.swift; sourceTree = "<group>"; };
-		52B21A422BE808B50017C2E9 /* DetailInformationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailInformationEntity.swift; sourceTree = "<group>"; };
-		52B21A442BE808B50017C2E9 /* ObjectInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectInformation.swift; sourceTree = "<group>"; };
-		52B21A452BE808B50017C2E9 /* ObjectInformationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectInformationEntity.swift; sourceTree = "<group>"; };
+		52B21A412BE808B50017C2E9 /* PetStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetStatus.swift; sourceTree = "<group>"; };
+		52B21A422BE808B50017C2E9 /* PetStatusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetStatusEntity.swift; sourceTree = "<group>"; };
+		52B21A442BE808B50017C2E9 /* PetInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetInfo.swift; sourceTree = "<group>"; };
+		52B21A452BE808B50017C2E9 /* PetInfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetInfoEntity.swift; sourceTree = "<group>"; };
 		52B21A472BE808B50017C2E9 /* FoodType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodType.swift; sourceTree = "<group>"; };
 		52B21A482BE808B50017C2E9 /* StatusType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusType.swift; sourceTree = "<group>"; };
 		52B21A542BE808BC0017C2E9 /* UIBarButtonItem+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Ext.swift"; sourceTree = "<group>"; };
@@ -187,12 +196,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				523F76E12C31BFFB00180725 /* RxRelay in Frameworks */,
 				52B21AF22BE809180017C2E9 /* SwiftEntryKit in Frameworks */,
+				523F76E72C31C3E800180725 /* Differentiator in Frameworks */,
+				523F76E32C31BFFB00180725 /* RxSwift in Frameworks */,
 				52B21AEF2BE809130017C2E9 /* SnapKit in Frameworks */,
+				523F76F82C322B2400180725 /* ReactorKit in Frameworks */,
 				52B21AE92BE809080017C2E9 /* SwipeCellKit in Frameworks */,
 				52DFB9A82BEBE9BA0057E72E /* Pods_Jelly_Project.framework in Frameworks */,
 				52B21AF52BE809210017C2E9 /* RealmSwift in Frameworks */,
 				52B21AEC2BE8090C0017C2E9 /* Then in Frameworks */,
+				523F76E92C31C3E900180725 /* RxDataSources in Frameworks */,
+				523F76DF2C31BFFB00180725 /* RxCocoa in Frameworks */,
+				526BCD132BEE01CA005248D5 /* GoogleMobileAds in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,8 +304,8 @@
 		52B21A432BE808B50017C2E9 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				52B21A412BE808B50017C2E9 /* DetailInformation.swift */,
-				52B21A422BE808B50017C2E9 /* DetailInformationEntity.swift */,
+				52B21A412BE808B50017C2E9 /* PetStatus.swift */,
+				52B21A422BE808B50017C2E9 /* PetStatusEntity.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -297,8 +313,8 @@
 		52B21A462BE808B50017C2E9 /* Object */ = {
 			isa = PBXGroup;
 			children = (
-				52B21A442BE808B50017C2E9 /* ObjectInformation.swift */,
-				52B21A452BE808B50017C2E9 /* ObjectInformationEntity.swift */,
+				52B21A442BE808B50017C2E9 /* PetInfo.swift */,
+				52B21A452BE808B50017C2E9 /* PetInfoEntity.swift */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -315,8 +331,8 @@
 		52B21A4A2BE808B50017C2E9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				52B21A432BE808B50017C2E9 /* Detail */,
 				52B21A462BE808B50017C2E9 /* Object */,
+				52B21A432BE808B50017C2E9 /* Detail */,
 				52B21A492BE808B50017C2E9 /* Type */,
 			);
 			path = Model;
@@ -325,6 +341,7 @@
 		52B21A4B2BE808B50017C2E9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				523F76F92C322BC400180725 /* PetInfoReactor.swift */,
 				52B21A3E2BE808B50017C2E9 /* DataBase */,
 				52B21A402BE808B50017C2E9 /* DataManager */,
 				52B21A4A2BE808B50017C2E9 /* Model */,
@@ -779,6 +796,13 @@
 				52B21AEE2BE809130017C2E9 /* SnapKit */,
 				52B21AF12BE809180017C2E9 /* SwiftEntryKit */,
 				52B21AF42BE809210017C2E9 /* RealmSwift */,
+				526BCD122BEE01CA005248D5 /* GoogleMobileAds */,
+				523F76DE2C31BFFB00180725 /* RxCocoa */,
+				523F76E02C31BFFB00180725 /* RxRelay */,
+				523F76E22C31BFFB00180725 /* RxSwift */,
+				523F76E62C31C3E800180725 /* Differentiator */,
+				523F76E82C31C3E900180725 /* RxDataSources */,
+				523F76F72C322B2400180725 /* ReactorKit */,
 			);
 			productName = Jelly_Project;
 			productReference = 52B21A1D2BE8081F0017C2E9 /* Jelly_Project.app */;
@@ -815,6 +839,10 @@
 				52B21AED2BE809120017C2E9 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				52B21AF02BE809180017C2E9 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */,
 				52B21AF32BE809210017C2E9 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				526BCD112BEE01C9005248D5 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				523F76DD2C31BFFB00180725 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				523F76E52C31C3E800180725 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				523F76F62C322B2400180725 /* XCRemoteSwiftPackageReference "ReactorKit" */,
 			);
 			productRefGroup = 52B21A1E2BE8081F0017C2E9 /* Products */;
 			projectDirPath = "";
@@ -909,7 +937,7 @@
 				52B21A8C2BE808BC0017C2E9 /* UIColorSet.swift in Sources */,
 				52B21A842BE808BC0017C2E9 /* Preview+Ext.swift in Sources */,
 				52B21A832BE808BC0017C2E9 /* Nib+Ext.swift in Sources */,
-				52B21A502BE808B50017C2E9 /* ObjectInformation.swift in Sources */,
+				52B21A502BE808B50017C2E9 /* PetInfo.swift in Sources */,
 				52B21AD72BE808F40017C2E9 /* CustomTextField.swift in Sources */,
 				52B21A852BE808BC0017C2E9 /* UIProgress+Ext.swift in Sources */,
 				52B21ADD2BE808F40017C2E9 /* FoodTypeViewController.swift in Sources */,
@@ -921,7 +949,7 @@
 				52B21A522BE808B50017C2E9 /* FoodType.swift in Sources */,
 				52B21ACA2BE808F40017C2E9 /* CustomPopup.swift in Sources */,
 				52B21AD42BE808F40017C2E9 /* CustomButton.swift in Sources */,
-				52B21A4E2BE808B50017C2E9 /* DetailInformation.swift in Sources */,
+				52B21A4E2BE808B50017C2E9 /* PetStatus.swift in Sources */,
 				52B21ACC2BE808F40017C2E9 /* SelectCollectionCell.swift in Sources */,
 				52B21AD52BE808F40017C2E9 /* CustomInfoView.swift in Sources */,
 				52B21A862BE808BC0017C2E9 /* Respon+Ext.swift in Sources */,
@@ -935,17 +963,18 @@
 				52B21AD62BE808F40017C2E9 /* CustomStackView.swift in Sources */,
 				52EAECC62BE9942600CDD68F /* ImageSet.swift in Sources */,
 				52B21A872BE808BC0017C2E9 /* UITextField+Ext.swift in Sources */,
-				52B21A512BE808B50017C2E9 /* ObjectInformationEntity.swift in Sources */,
+				52B21A512BE808B50017C2E9 /* PetInfoEntity.swift in Sources */,
 				52B21ADC2BE808F40017C2E9 /* SelectTypeConfiguration.swift in Sources */,
 				52B21A232BE8081F0017C2E9 /* SceneDelegate.swift in Sources */,
 				52B21A882BE808BC0017C2E9 /* UIMenu+Ext.swift in Sources */,
 				52B21ACB2BE808F40017C2E9 /* PopupPresets.swift in Sources */,
+				523F76FA2C322BC400180725 /* PetInfoReactor.swift in Sources */,
 				52B21A532BE808B50017C2E9 /* StatusType.swift in Sources */,
 				52B21A7E2BE808BC0017C2E9 /* UIBarButtonItem+Ext.swift in Sources */,
 				52B21A812BE808BC0017C2E9 /* UIFont+Ext.swift in Sources */,
 				52B21ADE2BE808F40017C2E9 /* StatusTypeViewController.swift in Sources */,
 				52B21A8D2BE808BC0017C2E9 /* SymbolSet.swift in Sources */,
-				52B21A4F2BE808B50017C2E9 /* DetailInformationEntity.swift in Sources */,
+				52B21A4F2BE808B50017C2E9 /* PetStatusEntity.swift in Sources */,
 				52B21AD22BE808F40017C2E9 /* CommonViewType.swift in Sources */,
 				52B21A3A2BE808690017C2E9 /* BasicUserDefaults.swift in Sources */,
 				52B21A802BE808BC0017C2E9 /* Double+Ext.swift in Sources */,
@@ -1204,6 +1233,38 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		523F76DD2C31BFFB00180725 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.7.1;
+			};
+		};
+		523F76E52C31C3E800180725 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
+		523F76F62C322B2400180725 /* XCRemoteSwiftPackageReference "ReactorKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactorKit/ReactorKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
+		526BCD112BEE01C9005248D5 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.4.0;
+			};
+		};
 		52B21AE72BE809080017C2E9 /* XCRemoteSwiftPackageReference "SwipeCellKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwipeCellKit/SwipeCellKit";
@@ -1247,6 +1308,41 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		523F76DE2C31BFFB00180725 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 523F76DD2C31BFFB00180725 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		523F76E02C31BFFB00180725 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 523F76DD2C31BFFB00180725 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		523F76E22C31BFFB00180725 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 523F76DD2C31BFFB00180725 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		523F76E62C31C3E800180725 /* Differentiator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 523F76E52C31C3E800180725 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = Differentiator;
+		};
+		523F76E82C31C3E900180725 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 523F76E52C31C3E800180725 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
+		523F76F72C322B2400180725 /* ReactorKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 523F76F62C322B2400180725 /* XCRemoteSwiftPackageReference "ReactorKit" */;
+			productName = ReactorKit;
+		};
+		526BCD122BEE01CA005248D5 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 526BCD112BEE01C9005248D5 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
 		52B21AE82BE809080017C2E9 /* SwipeCellKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 52B21AE72BE809080017C2E9 /* XCRemoteSwiftPackageReference "SwipeCellKit" */;

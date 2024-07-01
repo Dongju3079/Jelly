@@ -30,10 +30,6 @@ class StatusTypeViewController: UIViewController {
         setupUI()
     }
     
-    deinit {
-        print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
-    }
-    
     // MARK: - UI Setup
     fileprivate func setupUI() {
         self.title = "상태 선택"
@@ -85,7 +81,7 @@ extension StatusTypeViewController {
     
     fileprivate func pushNextVC(_ selectedType: StatusType) {
         guard let navigation = self.navigationController as? CustomNavigation else { return }
-        dataManager.currentDetailInfo?.status = selectedType
+        dataManager.currentPetStatus?.status = selectedType
         navigation.pushToViewController(destinationVCCase: .weight)
     }
     

@@ -15,27 +15,27 @@ class DataRepository {
     
     let realmDB = try! Realm()
     
-    var sectionData: Results<ObjectInformationEntity> {
-        realmDB.objects(ObjectInformationEntity.self)
+    var sectionData: Results<PetInfoEntity> {
+        realmDB.objects(PetInfoEntity.self)
     }
 
-    func readSections() -> [ObjectInformation] {
+    func readSections() -> [PetInfo] {
         let sortEntities = sectionData.sorted(byKeyPath: "date", ascending: false)
         
-        return sortEntities.map { ObjectInformation(sectionEntity: $0) }
+        return sortEntities.map { PetInfo(sectionEntity: $0) }
     }
     
-    func addNewSection(name: String) -> ObjectInformation {
-        let newName = ObjectInformationEntity(title: name)
+    func addPetInfo(name: String) -> PetInfo {
+        let newName = PetInfoEntity(title: name)
         
         try! realmDB.write({
             realmDB.add(newName)
         })
         
-        return ObjectInformation(sectionEntity: newName)
+        return PetInfo(sectionEntity: newName)
     }
     
-    func deleteSection(sectionEntity: ObjectInformation) {
+    func deleteSection(sectionEntity: PetInfo) {
         
         if let foundSectionEntity = findSection(sectionEntity) {
             try! realmDB.write({
@@ -52,15 +52,15 @@ extension DataRepository {
     
     /// 특정 섹션에 아이템 추가하기
     /// - Parameters:
-    ///   - sectionEntity: 추가하고자 하는 섹션
-    ///   - newResult: 추가하고자 하는 아이템
-    func addNewResult(object: ObjectInformation, detail: DetailInformation) {
-        let elementEntity = DetailInformationEntity(detail)
+    ///   - petInfo: 상태를 추가하고자 하는 펫
+    ///   - status: 펫 상태
+    func addNewResult(_ petInfo: PetInfo,_ status: PetStatus) {
+        let elementEntity = PetStatusEntity(status)
         
-        if let foundSectionEntity = findSection(object) {
+        if let foundSectionEntity = findSection(petInfo) {
             
             try! realmDB.write({
-                foundSectionEntity.details.append(elementEntity)
+                foundSectionEntity.petStatus.append(elementEntity)
             })
         }
     }
@@ -71,14 +71,14 @@ extension DataRepository {
     ///   - sectionEntity: 삭제하고자 하는 섹션
     ///   - deleteResult: 삭제하고자 하는 아이템
     /// - Returns: 삭제가 완료된 뒤 섹션배열
-    func deleteResultAtSection(sectionEntity: ObjectInformation, deleteResult: DetailInformation) {
+    func deleteResultAtSection(sectionEntity: PetInfo, deleteResult: PetStatus) {
         
         if let foundSectionEntity = findSection(sectionEntity),
-           let foundResultEntityIndex = foundSectionEntity.details.firstIndex(where: { $0.id == deleteResult.uuid }) {
+           let foundResultEntityIndex = foundSectionEntity.petStatus.firstIndex(where: { $0.id == deleteResult.entityId }) {
             
             try! realmDB.write({
                 print(#fileID, #function, #line, "-삭제 완료 ")
-                foundSectionEntity.details.remove(at: foundResultEntityIndex)
+                foundSectionEntity.petStatus.remove(at: foundResultEntityIndex)
             })
         }
     }
@@ -90,7 +90,7 @@ extension DataRepository {
     /// 섹션모델과 같은 섹션엔티티 찾기
     /// - Parameter sectionEntity: 찾고 싶은 섹션
     /// - Returns: 섹션 엔티티
-    fileprivate func findSection(_ sectionEntity: ObjectInformation) -> ObjectInformationEntity? {
+    fileprivate func findSection(_ sectionEntity: PetInfo) -> PetInfoEntity? {
         let foundSectionEntity = sectionData.filter {
             return $0.id == sectionEntity.uuid
         }.first

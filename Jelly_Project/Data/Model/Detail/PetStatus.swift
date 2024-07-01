@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import Differentiator
 
 
-
-class DetailInformation: NSObject {
+struct PetStatus: Hashable, IdentifiableType {
+    typealias Identity = UUID
     
-    var uuid: String?
+    var identity = UUID()
+    var entityId: String?
     var date: Date = Date()
     var foodType: FoodType?
     var status: StatusType?
@@ -19,7 +21,6 @@ class DetailInformation: NSObject {
     var wetFeedCalorie: Double?
     var dryFeedCalorie: Double?
     var dryFeedUnit: Double
-    
 
     init(date: Date = Date(),
          foodType: FoodType? = nil,
@@ -36,8 +37,8 @@ class DetailInformation: NSObject {
         self.weight = weight
     }
     
-    init(memoEntity: DetailInformationEntity) {
-        self.uuid = memoEntity.id
+    init(memoEntity: PetStatusEntity) {
+        self.entityId = memoEntity.id
         self.date = memoEntity.createdDate
         self.foodType = FoodType(rawValue: memoEntity.foodTypeRawValue ?? 0)
         self.status = StatusType(rawValue: memoEntity.statusTypeRawValue ?? 0)
@@ -46,14 +47,10 @@ class DetailInformation: NSObject {
         self.dryFeedCalorie = memoEntity.dryFeedCalorie ?? 0
         self.dryFeedUnit = memoEntity.dryFeedUnit ?? 1_000.0
     }
-    
-    static func == (lhs: DetailInformation, rhs: DetailInformation) -> Bool {
-            return lhs.date == rhs.date
-    }
 }
 
 // MARK: - 계산 메서드
-extension DetailInformation {
+extension PetStatus {
     
     var dateString: String? {
         let myFormatter = DateFormatter()

@@ -33,10 +33,6 @@ class ResultViewController: UIViewController {
         setupUI()
     }
     
-    deinit {
-        print("👾 테스트 : \(self)뷰가 해제되고 있습니다. 👾")
-    }
-    
     // MARK: - UI Setup
     fileprivate func setupUI() {
         setupNaviItem()
@@ -48,7 +44,7 @@ class ResultViewController: UIViewController {
     /// - Parameter elements: 반려동물 식사 타입
     fileprivate func createTypeView() {
         
-        guard let detailInfo = dataManager.currentDetailInfo,
+        guard let detailInfo = dataManager.currentPetStatus,
               let foodType = detailInfo.foodType else { return }
 
         setupInfoLabel(detailInfo)
@@ -65,9 +61,9 @@ class ResultViewController: UIViewController {
         }
     }
     
-    fileprivate func setupInfoLabel(_ detailInfo: DetailInformation) {
-        foodTypeLabel.text = detailInfo.foodType?.title ?? "타입 없음"
-        statusTypeLabel.text = detailInfo.status?.title ?? "타입 없음"
+    fileprivate func setupInfoLabel(_ detailInfo: PetStatus) {
+        foodTypeLabel.text = detailInfo.foodType?.name ?? "타입 없음"
+        statusTypeLabel.text = detailInfo.status?.name ?? "타입 없음"
         weightLabel.text = "\(detailInfo.weight) Kg"
     }
 

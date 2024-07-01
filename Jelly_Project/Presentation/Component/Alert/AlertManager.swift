@@ -12,8 +12,7 @@ import UIKit
 class AlertManager {
     
     static let shared = AlertManager()
-    
-    
+
     private init() { }
     
     func defaultAlert(target: UIViewController,
@@ -51,7 +50,6 @@ extension AlertManager {
         }
     }
     
-    #warning("하드코딩 부분 enum으로 돌려보기")
     func addNameAlert(target: UIViewController,
                       completion: ((String) -> Void)? = nil) {
         let alert = UIAlertController(title: "이름 추가하기", message: "반려묘의 이름을 입력해주세요.", preferredStyle: .alert)

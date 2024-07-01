@@ -6,6 +6,8 @@
 // Test
 
 import Foundation
+import RxSwift
+import RxRelay
 
 enum EmptyError: Error {
     case notEmpty
@@ -15,9 +17,14 @@ class DataManager {
     
     static let shared = DataManager()
     private let dataRepository = DataRepository.shared
-    var currentObjectInfo: ObjectInformation?
-    var currentDetailInfo: DetailInformation?
-    var objects : [ObjectInformation] = []
+    
+    var testRx: BehaviorRelay<([PetInfo], Int?, Bool?)> = .init(value: ([], nil, nil))
+    
+    var petInfos : [PetInfo] = []
+    
+    var currentPetInfo: PetInfo?
+    
+    var currentPetStatus: PetStatus?
 
     private init() { }
 
@@ -27,39 +34,51 @@ class DataManager {
 extension DataManager {
     
     func readData() {
-        objects = dataRepository.readSections()
+        petInfos = dataRepository.readSections()
+        print("테스트 2 : 데이터 전달  /  count : \(petInfos.count)")
+        
+        testRx.accept((petInfos, nil, nil))
     }
     
-    func removeDataToDB(_ index: IndexPath) -> DetailInformation {
-        let object = objects[index.section]
-        let item = object.data[index.row]
+    func removeDataToDB(_ index: IndexPath) -> PetStatus {
+        let object = petInfos[index.section]
+        let item = object.status[index.row]
         
-        self.objects[index.section].data.removeAll {
-            $0.uuid == item.uuid
+        self.petInfos[index.section].status.removeAll {
+            $0.entityId == item.entityId
         }
         
-        self.dataRepository.deleteResultAtSection(sectionEntity: object, deleteResult: item)
+        let filterStatus = self.testRx.value.0.map { petInfo in
+            var info = petInfo
+            info.status.removeAll(where: { status in
+                status.entityId == item.entityId
+            })
+            return info
+        }
         
+        let isEmpty = filterStatus[index.section].status.isEmpty
+        
+        testRx.accept((filterStatus, index.section, isEmpty))
         return item
     }
     
     func saveDataToDB() {
-        guard let object = currentObjectInfo,
-              let detail = currentDetailInfo else { return }
+        guard let petInfo = currentPetInfo,
+              let petStatus = currentPetStatus else { return }
         
-        DataRepository.shared.addNewResult(object: object, detail: detail)
+        DataRepository.shared.addNewResult(petInfo, petStatus)
     }
     
-    func makeNewObjectToDB(_ objectName: String) -> ObjectInformation {
-        let object = dataRepository.addNewSection(name: objectName)
+    func makePetInfo(_ petName: String) -> PetInfo {
+        let petInfo = dataRepository.addPetInfo(name: petName)
         
-        self.objects.insert(object, at: 0)
+        self.petInfos.insert(petInfo, at: 0)
         
-        return object
+        return petInfo
     }
     
-    func deleteObjectToDB(_ object: ObjectInformation) {
-        self.objects.removeAll {
+    func deleteObjectToDB(_ object: PetInfo) {
+        self.petInfos.removeAll {
             $0 == object
         }
         
@@ -70,26 +89,23 @@ extension DataManager {
 // MARK: - 데이터 체크
 extension DataManager {
     
-    func checkObjectDataEmpty() -> Bool {
-        return self.objects.isEmpty
+    func checkPetInfoDataEmpty() -> Bool {
+        return self.petInfos.isEmpty
     }
     
-    func checkDetailDataEmpty() throws  {
+    func checkDisplayDataEmpty() -> Bool {
+        let petStatusData = petInfos.filter { !$0.status.isEmpty }
         
-        return try objects.forEach {
-            if !$0.data.isEmpty {
-                throw EmptyError.notEmpty
-            }
-        }
+        return petStatusData.isEmpty
     }
     
-    func checkDetailCountToObject(_ section: Int) -> Bool {
-        let object = objects[section]
-        return object.data.isEmpty
+    func checkPetStatusIsEmpty(_ section: Int) -> Bool {
+        let object = petInfos[section]
+        return object.status.isEmpty
     }
     
     func checkSameObject(title: String) -> Bool {
-        return objects.contains { $0.title == title }
+        return petInfos.contains { $0.name == title }
     }
 }
 
@@ -97,13 +113,13 @@ extension DataManager {
 extension DataManager {
     
     func setCurrentData(index: IndexPath) {
-        currentObjectInfo = objects[index.section]
-        currentDetailInfo = currentObjectInfo?.data[index.row]
+        currentPetInfo = petInfos[index.section]
+        currentPetStatus = currentPetInfo?.status[index.row]
     }
     
     func makeDetailToObject(index: IndexPath) {
-        currentObjectInfo = objects[index.item]
-        currentDetailInfo = DetailInformation()
+        currentPetInfo = petInfos[index.item]
+        currentPetStatus = PetStatus()
     }
 }
 
@@ -112,18 +128,18 @@ extension DataManager {
 extension DataManager {
     
     func wetFeedMaxCount() -> Int {
-        guard let currentDetailInfo = currentDetailInfo else { return 0 }
+        guard let currentDetailInfo = currentPetStatus else { return 0 }
         return currentDetailInfo.maxWetFeedCount()
     }
 
     func adequateCalorie() -> String? {
-        guard let adequate = currentDetailInfo?.adequateCalorie().convertString else { return nil }
+        guard let adequate = currentPetStatus?.adequateCalorie().convertString else { return nil }
         return adequate
     }
     
     func calculateAmount() -> String? {
         
-        switch currentDetailInfo?.foodType {
+        switch currentPetStatus?.foodType {
         case .wet, .dry:
             return amountOfFeed()
         case .mix:
@@ -134,10 +150,10 @@ extension DataManager {
     }
     
     func amountOfFeed() -> String? {
-        guard let detailInfo = currentDetailInfo else { return nil }
+        guard let detailInfo = currentPetStatus else { return nil }
         let adequateCalorie = detailInfo.adequateCalorie()
         
-        switch currentDetailInfo?.foodType {
+        switch currentPetStatus?.foodType {
         case .wet:
             let feedCalorie = detailInfo.wetFeedCalorie ?? 0.0
             return (adequateCalorie / feedCalorie).convertString + " 캔"
@@ -150,7 +166,7 @@ extension DataManager {
     }
     
     func dryFeedAmountOfWetFeedCount(_ count: Int) -> String? {
-        guard let detailInfo = currentDetailInfo,
+        guard let detailInfo = currentPetStatus,
               let wetFeedCalorie = detailInfo.wetFeedCalorie  else { return nil }
         
         let dryFeedOfUnit = detailInfo.dryFeedConvertOfUnit()
@@ -166,3 +182,4 @@ extension DataManager {
         }
     }
 }
+

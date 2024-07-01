@@ -17,7 +17,7 @@ enum StatusType: Int, Selectable, Codable, CaseIterable {
     case neutered = 6
     case notNeutered = 7
     
-    var title: String {
+    var name: String {
         switch self {
         case .kitten:
             return "성장기"

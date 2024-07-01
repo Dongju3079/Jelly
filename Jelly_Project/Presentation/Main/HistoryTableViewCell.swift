@@ -14,11 +14,11 @@ class HistoryTableViewCell: SwipeTableViewCell {
     
     // MARK: - Variables
     
-    var detailModel: DetailInformation? {
+    var status: PetStatus? {
         didSet {
-            guard let dataModel = detailModel else { return }
+            guard let dataModel = status else { return }
             
-            self.statusLabel.text = dataModel.status?.title
+            self.statusLabel.text = dataModel.status?.name
             self.dateLabel.text = dataModel.dateString
             let adequateCalorie = dataModel.adequateCalorie().convertString
             self.calorieLabel.text = "적정 칼로리 : \(adequateCalorie) kcal"

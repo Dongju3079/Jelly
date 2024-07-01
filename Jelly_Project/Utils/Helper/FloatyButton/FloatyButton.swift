@@ -16,10 +16,6 @@ class FloatyInit {
         case edit
     }
     
-    deinit {
-        print("👾 테스트 : floaty 해제됨 👾")
-    }
-    
     func getFloatyButton(delegate: FloatySelectDelegate?,
                                 image: ImageSet.Name = .plus,
                                 size: CGFloat = 70,
